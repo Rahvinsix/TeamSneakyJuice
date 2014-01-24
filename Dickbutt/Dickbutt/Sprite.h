@@ -1,6 +1,6 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "GlobalHeader.h"
 
 
 class Sprite
@@ -9,7 +9,7 @@ public:
 	Sprite(char*);
 	~Sprite(void);
 
-	void Draw(sf::RenderWindow*);
+	sf::Sprite GetSprite();
 
 private:
 	sf::Texture* tex;

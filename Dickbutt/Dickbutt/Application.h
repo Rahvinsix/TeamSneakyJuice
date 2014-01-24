@@ -2,7 +2,7 @@
 
 #include "GlobalHeader.h"
 #include "Input.h"
-#include "Sprite.h"
+#include "GameObject.h"
 
 
 class Application
@@ -19,6 +19,6 @@ private:
 	void Update();
 	void Draw();
 
-	Sprite* testSprite;
+	GameObject* testObject;
 };
 

@@ -20,14 +20,14 @@ Sprite::~Sprite(void)
 	delete tex;
 }
 
-void Sprite::Draw(sf::RenderWindow* window)
+sf::Sprite Sprite::GetSprite()
 {
+	sf::Sprite sprite;
+
 	if(texLoaded)
 	{
-		sf::Sprite sprite;
-
 		sprite.setTexture(*tex);
-
-		window->draw(sprite);
 	}
+
+	return sprite;
 }

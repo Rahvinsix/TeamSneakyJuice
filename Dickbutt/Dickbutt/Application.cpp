@@ -7,8 +7,8 @@ Application::Application(void)
 
 	gameEnded = false;
 	
-	testSprite = new Sprite("Assets/Images/dirtCenter.png");
-
+	testObject = (new GameObject())->SetSprite("Assets/Images/dirtCenter.png")->SetPosition(sf::Vector2f(100, 100));
+	
     while (window->isOpen())
     {
 		Update();
@@ -47,7 +47,7 @@ void Application::Draw()
 {
     window->clear(sf::Color(255, 255, 255, 255));
 
-	testSprite->Draw(window);
+	testObject->Draw(window);
 
     window->display();
 }
