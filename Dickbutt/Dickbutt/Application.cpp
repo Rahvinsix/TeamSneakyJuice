@@ -25,7 +25,7 @@ void Application::Update()
 		switch(event.type)
 		{
 		case sf::Event::Closed:
-			_gameEnded;
+			_gameEnded = true;
 			break;
 		case sf::Event::KeyPressed:
 			break;
