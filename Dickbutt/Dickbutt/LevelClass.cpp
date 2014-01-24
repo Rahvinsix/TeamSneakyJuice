@@ -9,7 +9,7 @@ LevelClass::LevelClass(void)
 		for(int j = 0;j < 10; j++)
 		{
 			levelGrid[i][j].SetPosition(sf::Vector2f(i*spriteSize.width,j*spriteSize.height));
-			if(j%2==0)
+			if(j==9||i==0||i==9)
 			{
 				levelGrid[i][j].SetSpriteID(SpriteLibrary::GROUND);
 			}
