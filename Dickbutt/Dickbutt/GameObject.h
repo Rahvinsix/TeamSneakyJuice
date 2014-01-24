@@ -1,7 +1,7 @@
 #pragma once
 
 #include "GlobalHeader.h"
-#include "sprite.h"
+#include "SpriteLibrary.h"
 
 
 class GameObject
@@ -10,14 +10,15 @@ public:
 	GameObject(void);
 	~GameObject(void);
 	
-	GameObject* SetSprite(char*);
+	
 	GameObject* SetPosition(sf::Vector2f);
+	GameObject* SetSpriteID(int);
 
 	void Draw(sf::RenderWindow*);
 
 private:
-	bool hasSprite;
-	Sprite* sprite;
+	
+	int spriteID;
 
 	sf::Vector2f position;
 };

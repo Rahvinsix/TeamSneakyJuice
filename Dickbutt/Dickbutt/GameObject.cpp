@@ -3,21 +3,19 @@
 
 GameObject::GameObject(void)
 {
-	hasSprite = false;
+	
 }
 
 
 GameObject::~GameObject(void)
 {
-	if(hasSprite)
-		delete sprite;
+	
 }
 
-GameObject* GameObject::SetSprite(char* fileName)
+GameObject* GameObject::SetSpriteID(int spriteID)
 {
-	sprite = new Sprite(fileName);
-	hasSprite = true;
-
+	this->spriteID = spriteID;
+	
 	return this;
 }
 
@@ -30,7 +28,7 @@ GameObject* GameObject::SetPosition(sf::Vector2f pos)
 
 void GameObject::Draw(sf::RenderWindow* window)
 {
-	sf::Sprite renderSprite = sprite->GetSprite();
+	sf::Sprite renderSprite = SpriteLibrary::GetSprite(spriteID);
 
 	renderSprite.setPosition(position);
 

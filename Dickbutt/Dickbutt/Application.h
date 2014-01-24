@@ -4,6 +4,7 @@
 #include "Input.h"
 #include "GameObject.h"
 #include "SpriteLibrary.h"
+#include "LevelClass.h"
 
 
 class Application
@@ -15,7 +16,7 @@ private:
 	sf::RenderWindow* window;
 
 	bool gameEnded;
-
+	LevelClass *level;
 
 	void Update();
 	void Draw();

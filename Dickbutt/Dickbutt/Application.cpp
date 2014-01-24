@@ -6,10 +6,8 @@ Application::Application(void)
 	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Team Sneaky Juice");
 
 	SpriteLibrary::Initialise();
-
+	level = new LevelClass();
 	gameEnded = false;
-	
-	testObject = (new GameObject())->SetSprite("Assets/Images/dirtCenter.png")->SetPosition(sf::Vector2f(100, 100));
 	
     while (window->isOpen())
     {
@@ -48,13 +46,12 @@ void Application::Update()
 void Application::Draw()
 {
     window->clear(sf::Color(255, 255, 255, 255));
-
-	testObject->Draw(window);
-
+	level->Draw(window);
     window->display();
 }
 
 Application::~Application(void)
 {
 	delete window;
+	delete level;
 }
