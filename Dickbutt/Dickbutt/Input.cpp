@@ -4,7 +4,6 @@ bool* Input::keys = new bool[sf::Keyboard::KeyCount];
 bool* Input::prevKeys = new bool[sf::Keyboard::KeyCount];
 
 
-
 Input::Input(void)
 {
 	

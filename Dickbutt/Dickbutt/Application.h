@@ -3,6 +3,7 @@
 #include "GlobalHeader.h"
 #include "Input.h"
 #include "GameObject.h"
+#include "SpriteLibrary.h"
 
 
 class Application

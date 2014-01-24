@@ -5,6 +5,8 @@ Application::Application(void)
 {
 	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Team Sneaky Juice");
 
+	SpriteLibrary::Initialise();
+
 	gameEnded = false;
 	
 	testObject = (new GameObject())->SetSprite("Assets/Images/dirtCenter.png")->SetPosition(sf::Vector2f(100, 100));
