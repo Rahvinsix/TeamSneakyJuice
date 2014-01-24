@@ -19,6 +19,9 @@ Application::Application(void)
 
 void Application::Update()
 {
+	//Update player input
+	Input::Update();
+	
     sf::Event event;
     while (_window->pollEvent(event))
     {
@@ -28,8 +31,10 @@ void Application::Update()
 			_gameEnded = true;
 			break;
 		case sf::Event::KeyPressed:
+			Input::KeyPressed(event.key.code);
 			break;
 		case sf::Event::KeyReleased:
+			Input::KeyReleased(event.key.code);
 			break;
 		}
     }

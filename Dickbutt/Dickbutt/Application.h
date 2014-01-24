@@ -1,6 +1,7 @@
 #pragma once
 
-#include <SFML/Graphics.hpp>
+#include "GlobalHeader.h"
+#include "Input.h"
 
 
 class Application
