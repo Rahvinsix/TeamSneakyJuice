@@ -19,7 +19,7 @@ public:
 
 	void Draw(sf::RenderWindow*);
 
-	void Click(sf::Event::MouseMoveEvent);
+	void Click(sf::Event::MouseMoveEvent, int);
 
 private:
 	int** map;

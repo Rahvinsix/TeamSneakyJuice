@@ -38,8 +38,8 @@ void MapGrid::Draw(sf::RenderWindow* window)
 		}
 }
 
-void MapGrid::Click(sf::Event::MouseMoveEvent mE)
+void MapGrid::Click(sf::Event::MouseMoveEvent mE, int currentTile)
 {
 	if(mE.x < spriteSize.width * MAP_WIDTH && mE.x >= 0 && mE.y < spriteSize.height * MAP_HEIGHT && mE.y >= 0)
-		map[int(mE.x / spriteSize.width)][int(mE.y / spriteSize.height)] = 1;
+		map[int(mE.x / spriteSize.width)][int(mE.y / spriteSize.height)] = currentTile;
 }

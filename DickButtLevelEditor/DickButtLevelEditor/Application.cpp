@@ -32,13 +32,14 @@ void Application::Update()
 			break;
 		case sf::Event::MouseButtonPressed:
 			mouseDown = true;
+			tileGrid.Click(event.mouseButton);
 			break;
 		case sf::Event::MouseButtonReleased:
 			mouseDown = false;
 			break;
 		case sf::Event::MouseMoved:
 			if(mouseDown)
-				mapGrid.Click(event.mouseMove);
+				mapGrid.Click(event.mouseMove, tileGrid.CurrentTile());
 		}
     }
 
@@ -49,6 +50,7 @@ void Application::Draw()
     window->clear(sf::Color(255, 255, 255, 255));
 
 	mapGrid.Draw(window);
+	tileGrid.Draw(window);
 
     window->display();
 }

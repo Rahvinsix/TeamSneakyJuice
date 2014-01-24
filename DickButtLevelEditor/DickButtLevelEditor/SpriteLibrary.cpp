@@ -1,6 +1,6 @@
 #include "SpriteLibrary.h"
 
-Sprite** SpriteLibrary::sprites = new Sprite*[2];
+Sprite** SpriteLibrary::sprites = new Sprite*[TOTAL_SPRITES];
 
 
 SpriteLibrary::SpriteLibrary(void)

@@ -2,6 +2,9 @@
 
 #include "Sprite.h"
 
+#define TOTAL_SPRITES 2
+
+
 class SpriteLibrary
 {
 public:

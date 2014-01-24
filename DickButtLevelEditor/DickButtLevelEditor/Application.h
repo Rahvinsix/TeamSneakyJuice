@@ -4,6 +4,7 @@
 #include "GameObject.h"
 #include "MapGrid.h"
 #include "SpriteLibrary.h"
+#include "TileGrid.h"
 
 
 class Application
@@ -17,6 +18,7 @@ private:
 	bool gameEnded;
 
 	MapGrid mapGrid;
+	TileGrid tileGrid;
 	
 	bool mouseDown;
 
