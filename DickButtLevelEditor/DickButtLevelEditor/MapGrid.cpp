@@ -3,11 +3,6 @@
 
 MapGrid::MapGrid(void)
 {
-	sprites = new Sprite*[2];
-
-	sprites[0] = new Sprite("Assets/Images/dirtCenter.png");
-	sprites[1] = new Sprite("Assets/Images/dirtCenter_2.png");
-
 	map = new int*[MAP_WIDTH];
 	for(int i = 0; i < MAP_WIDTH; i++)
 	{
@@ -24,7 +19,7 @@ MapGrid::~MapGrid(void)
 
 void MapGrid::Draw(sf::RenderWindow* window)
 {
-	spriteSize = sprites[0]->GetSprite().getLocalBounds();
+	spriteSize = SpriteLibrary::GetSprite(0).getLocalBounds();
 
 	float mapSize = MAP_SCREEN_WIDTH / MAP_WIDTH;
 	if(mapSize > MAP_SCREEN_HEIGHT / MAP_HEIGHT)
@@ -36,7 +31,7 @@ void MapGrid::Draw(sf::RenderWindow* window)
 	for(int i = 0; i < MAP_WIDTH; i++)
 		for(int j = 0; j < MAP_HEIGHT; j++)
 		{
-			sf::Sprite sprite = sprites[map[i][j]]->GetSprite();
+			sf::Sprite sprite = SpriteLibrary::GetSprite(map[i][j]);
 			sprite.setPosition(spriteSize.width * i, spriteSize.height * j);
 			sprite.setScale(spriteSize.width / sprite.getLocalBounds().width, spriteSize.height / sprite.getLocalBounds().height);
 			window->draw(sprite);

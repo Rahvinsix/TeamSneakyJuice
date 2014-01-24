@@ -71,6 +71,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MapGrid.cpp" />
     <ClCompile Include="Sprite.cpp" />
+    <ClCompile Include="SpriteLibrary.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application.h" />
@@ -78,6 +79,7 @@
     <ClInclude Include="GlobalHeader.h" />
     <ClInclude Include="MapGrid.h" />
     <ClInclude Include="Sprite.h" />
+    <ClInclude Include="SpriteLibrary.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

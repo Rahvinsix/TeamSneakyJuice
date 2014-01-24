@@ -3,6 +3,7 @@
 #include "GlobalHeader.h"
 #include "GameObject.h"
 #include "MapGrid.h"
+#include "SpriteLibrary.h"
 
 
 class Application

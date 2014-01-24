@@ -2,6 +2,7 @@
 
 #include "GameObject.h"
 #include "Sprite.h"
+#include "SpriteLibrary.h"
 
 #define MAP_SCREEN_WIDTH 400
 #define MAP_SCREEN_HEIGHT 400
@@ -21,7 +22,6 @@ public:
 	void Click(sf::Event::MouseMoveEvent);
 
 private:
-	Sprite** sprites;
 	int** map;
 
 	sf::FloatRect spriteSize;

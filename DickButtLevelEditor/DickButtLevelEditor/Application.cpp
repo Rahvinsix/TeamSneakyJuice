@@ -8,6 +8,8 @@ Application::Application(void)
 	gameEnded = false;
 	mouseDown = false;
 	
+	SpriteLibrary::Initialise();
+	
     while (window->isOpen())
     {
 		Update();
