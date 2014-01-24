@@ -2,6 +2,7 @@
 
 #include "GlobalHeader.h"
 #include "Input.h"
+#include "Sprite.h"
 
 
 class Application
@@ -10,12 +11,14 @@ public:
 	Application(void);
 	~Application(void);
 private:
-	sf::RenderWindow* _window;
+	sf::RenderWindow* window;
 
-	bool _gameEnded;
+	bool gameEnded;
 
 
 	void Update();
 	void Draw();
+
+	Sprite* testSprite;
 };
 

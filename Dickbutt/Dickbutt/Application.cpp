@@ -3,17 +3,19 @@
 
 Application::Application(void)
 {
-	_window = new sf::RenderWindow(sf::VideoMode(800, 600), "Team Sneaky Juice");
+	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Team Sneaky Juice");
 
-	_gameEnded = false;
+	gameEnded = false;
+	
+	testSprite = new Sprite("Assets/Images/dirtCenter.png");
 
-    while (_window->isOpen())
+    while (window->isOpen())
     {
 		Update();
 		Draw();
 
-		if(_gameEnded)
-			_window->close();
+		if(gameEnded)
+			window->close();
     }
 }
 
@@ -23,12 +25,12 @@ void Application::Update()
 	Input::Update();
 	
     sf::Event event;
-    while (_window->pollEvent(event))
+    while (window->pollEvent(event))
     {
 		switch(event.type)
 		{
 		case sf::Event::Closed:
-			_gameEnded = true;
+			gameEnded = true;
 			break;
 		case sf::Event::KeyPressed:
 			Input::KeyPressed(event.key.code);
@@ -38,15 +40,19 @@ void Application::Update()
 			break;
 		}
     }
+
 }
 
 void Application::Draw()
 {
-    _window->clear(sf::Color(255, 255, 255, 255));
-    _window->display();
+    window->clear(sf::Color(255, 255, 255, 255));
+
+	testSprite->Draw(window);
+
+    window->display();
 }
 
 Application::~Application(void)
 {
-	delete _window;
+	delete window;
 }
