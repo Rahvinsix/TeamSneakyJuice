@@ -11,6 +11,7 @@ public:
 	~SpriteLibrary(void);
 
 	static void Initialise(void);
+	static void Delete(void);
 
 	static sf::Sprite GetSprite(int);
 	static sf::Texture GetTexture(int);
@@ -43,6 +44,6 @@ public:
 		SPIN_CHAIN
 	};
 
-	static Sprite** _libraryFile;
+	static Sprite* _libraryFile[TOTAL_SPRITES];
 };
 

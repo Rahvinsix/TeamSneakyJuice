@@ -77,7 +77,6 @@ void Application::Update()
 				i->GetGameObject()->seen = false;
 
 			}
-	
 		}
 	}
 

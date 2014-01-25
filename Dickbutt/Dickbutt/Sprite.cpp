@@ -1,6 +1,11 @@
 #include "Sprite.h"
 
 
+Sprite::Sprite()
+{
+	texLoaded = false;
+}
+
 Sprite::Sprite(char* fileName)
 {
 	tex = new sf::Texture();

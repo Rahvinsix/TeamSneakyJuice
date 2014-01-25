@@ -6,6 +6,7 @@
 class Sprite
 {
 public:
+	Sprite();
 	Sprite(char*);
 	~Sprite(void);
 

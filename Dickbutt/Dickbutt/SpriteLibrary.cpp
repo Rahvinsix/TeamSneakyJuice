@@ -1,6 +1,6 @@
 #include "SpriteLibrary.h"
 
-Sprite** SpriteLibrary::_libraryFile = new Sprite*[];
+Sprite* SpriteLibrary::_libraryFile[] = {new Sprite()};
 
 
 SpriteLibrary::SpriteLibrary(void)
@@ -10,7 +10,6 @@ SpriteLibrary::SpriteLibrary(void)
 
 SpriteLibrary::~SpriteLibrary(void)
 {
-	delete _libraryFile;
 }
 
 void SpriteLibrary::Initialise(void)
