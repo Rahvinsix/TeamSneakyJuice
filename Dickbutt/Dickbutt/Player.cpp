@@ -3,10 +3,30 @@
 
 Player::Player(void)
 {
-	//SetSprite("lol file")->SetPosition(sf::Vector2f(100, 200));
+	SetSpriteID(SpriteLibrary::PLAYER);
+	SetPosition(sf::Vector2f(60.f,60.0f));
 }
 
 
 Player::~Player(void)
 {
 }
+
+void Player::Update(void)
+{
+	
+	SetVelocity(sf::Vector2f(0.0f,0.0f));
+	if(Input::IsDown(sf::Keyboard::D))
+	{
+		SetVelocity(sf::Vector2f(2.0f,0.0f));
+	}
+	else if(Input::IsDown(sf::Keyboard::A))
+	{
+		SetVelocity(sf::Vector2f(-2.0f,0.0f));
+	}
+
+
+	Move();
+	
+}
+

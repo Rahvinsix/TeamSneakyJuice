@@ -11,16 +11,18 @@ public:
 	~SpriteLibrary(void);
 
 	static void Initialise(void);
+
 	static sf::Sprite GetSprite(int);
-	
+
 	
 	enum
 	{
-		GROUND,
 		AIR,
+		GROUND,
 		SPIN_BLOCK,
 		SPIN_OBJECT,
 		SPIN_CHAIN,
+		PLAYER
 	};
 
 	static Sprite** _libraryFile;

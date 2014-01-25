@@ -64,3 +64,4 @@ void LevelClass::Draw(sf::RenderWindow* window)
 	for(std::vector<SpinningObject>::iterator spinObj = _spinningObjects.begin(); spinObj != _spinningObjects.end(); spinObj++)
 		spinObj->Draw(window);
 }
+

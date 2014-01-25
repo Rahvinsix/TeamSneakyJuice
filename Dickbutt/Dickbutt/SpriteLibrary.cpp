@@ -3,7 +3,6 @@
 Sprite** SpriteLibrary::_libraryFile = new Sprite*[TOTAL_SPRITES];
 
 
-
 SpriteLibrary::SpriteLibrary(void)
 {
 	
@@ -21,6 +20,8 @@ void SpriteLibrary::Initialise(void)
 	_libraryFile[SPIN_BLOCK] = new Sprite("Assets/Images/SpinCentre.png");
 	_libraryFile[SPIN_OBJECT] = new Sprite("Assets/Images/SpinEnd.png");
 	_libraryFile[SPIN_CHAIN] = new Sprite("Assets/Images/SpinChain.png");
+
+	_libraryFile[PLAYER] = new Sprite("Assets/Images/player.png");
 }
 
 sf::Sprite SpriteLibrary::GetSprite(int spriteID)

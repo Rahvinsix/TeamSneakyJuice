@@ -17,6 +17,11 @@ public:
 	void Draw(sf::RenderWindow* window);
 	void Update();
 
+	GameObject* TileAt(int, int);
+
+	int Width();
+	int Height();
+
 
 private:
 	GameObject** _levelGrid;

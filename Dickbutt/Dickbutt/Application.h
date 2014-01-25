@@ -5,6 +5,7 @@
 #include "GameObject.h"
 #include "SpriteLibrary.h"
 #include "LevelClass.h"
+#include "Player.h"
 
 
 class Application
@@ -21,7 +22,6 @@ private:
 
 	bool _gameEnded;
 	LevelClass* _level;
-
-	GameObject* _testObject;
+	Player* _player;
 };
 
