@@ -49,3 +49,10 @@ void SpinningObject::Draw(sf::RenderWindow* window)
 
 	_gameObject.Draw(window);
 }
+
+GameObject* SpinningObject::GetGameObject(void)
+{
+
+	return &_gameObject;
+
+}

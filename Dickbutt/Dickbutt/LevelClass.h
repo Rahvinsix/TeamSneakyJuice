@@ -21,12 +21,13 @@ public:
 
 	int Width();
 	int Height();
+	std::vector<SpinningObject> _spinningObjects;
+
 
 
 private:
 	GameObject** _levelGrid;
-	std::vector<SpinningObject> _spinningObjects;
-
+	
 	int _width;
 	int _height;
 };
