@@ -6,6 +6,7 @@
 #include "SpriteLibrary.h"
 #include "LevelClass.h"
 #include "Player.h"
+#include <sstream>
 
 
 class Application
@@ -19,6 +20,7 @@ private:
 
 
 	sf::RenderWindow* _window;
+	sf::Font* _font;
 
 	float _timeSinceLastUpdate;
 

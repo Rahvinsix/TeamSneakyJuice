@@ -17,6 +17,9 @@ Application::Application(void)
 	_camera = new sf::View(sf::FloatRect(0, 0, 800, 600));
 	_window->setView(*_camera);
 
+	_font = new sf::Font();
+	_font->loadFromFile("Assets/Fonts/arial.ttf");
+
 	
     while (_window->isOpen())
     {
@@ -33,66 +36,29 @@ void Application::Update()
 	_timeSinceLastUpdate = _updateTime.getElapsedTime().asSeconds();
 	_updateTime.restart();
 
-	printf("FPS: %f\n", _timeSinceLastUpdate);
-
-	if(_player->_playerFacing == true)
+	if(_player->_playerFacing)
 	{
 		for(int i = 0; i < _level->Width();i++)
-		{
 			for(int j = 0;j < _level->Height(); j++)
-			{
 				if((_level->TileAt(i, j)->GetSpriteID() != SpriteLibrary::AIR) && (_level->TileAt(i, j)->GetPosition().x > _player->GetPosition().x))
-				{
-			
 					_level->TileAt(i, j)->seen = true;
-
-				}
 				else
-				{
-				
 					_level->TileAt(i, j)->seen = false;
-
-				}
-			}
-		}
 
 		for(std::vector<SpinningObject>::iterator i = _level->_spinningObjects.begin();i!= _level->_spinningObjects.end();i++)
-		{
-	
 			if(i->GetGameObject()->GetPosition().x > _player->GetPosition().x)
-			{
-		
 				i->GetGameObject()->seen = true;
-			}
 			else
-			{
-			
 				i->GetGameObject()->seen = false;
-			}
-	
-		}
 	}
-	else if(_player->_playerFacing == false)
+	else
 	{
 		for(int i = 0; i < _level->Width();i++)
-		{
 			for(int j = 0;j < _level->Height(); j++)
-			{
 				if((_level->TileAt(i, j)->GetSpriteID() != SpriteLibrary::AIR) && (_level->TileAt(i, j)->GetPosition().x < _player->GetPosition().x))
-				{
-					
-					
 					_level->TileAt(i, j)->seen = true;
-
-				}
 				else
-				{
-				
 					_level->TileAt(i, j)->seen = false;
-
-				}
-			}
-		}
 
 		for(std::vector<SpinningObject>::iterator i = _level->_spinningObjects.begin();i!= _level->_spinningObjects.end();i++)
 		{
@@ -189,7 +155,16 @@ void Application::Draw()
 
 	_level->Draw(_window, _player->GetCentre());
 	_player->Draw(_window);
-
+	
+	sf::Text fps;
+	std::stringstream ss;
+	ss << "FPS: ";
+	ss << int(1 / _timeSinceLastUpdate);
+	fps.setString(ss.str());
+	fps.setFont(*_font);
+	fps.setPosition(_player->GetCentre() + sf::Vector2f(-380, -280));
+	_window->draw(fps);
+	
     _window->display();
 }
 
@@ -199,4 +174,5 @@ Application::~Application(void)
 	delete _level;
 	delete _player;
 	delete _camera;
+	delete _font;
 }
