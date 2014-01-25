@@ -43,13 +43,14 @@ void Application::Update()
 		case sf::Event::MouseButtonPressed:
 			mouseDown = true;
 			tileGrid.Click(event.mouseButton);
+			mapGrid->Click(event.mouseButton.x, event.mouseButton.y, tileGrid.CurrentTile());
 			break;
 		case sf::Event::MouseButtonReleased:
 			mouseDown = false;
 			break;
 		case sf::Event::MouseMoved:
 			if(mouseDown)
-				mapGrid->Click(event.mouseMove, tileGrid.CurrentTile());
+				mapGrid->Click(event.mouseMove.x, event.mouseMove.y, tileGrid.CurrentTile());
 		}
     }
 

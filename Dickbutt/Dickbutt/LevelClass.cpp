@@ -36,8 +36,6 @@ LevelClass::LevelClass(std::string fileName)
 
 		lineNum++;
 	}
-
-	//_spinningObjects.push_back(SpinningObject(4, 4));
 }
 
 
@@ -65,3 +63,17 @@ void LevelClass::Draw(sf::RenderWindow* window)
 		spinObj->Draw(window);
 }
 
+GameObject* LevelClass::TileAt(int x, int y)
+{
+	return &_levelGrid[x][y];
+}
+
+int LevelClass::Width()
+{
+	return _width;
+}
+
+int LevelClass::Height()
+{
+	return _height;
+}
