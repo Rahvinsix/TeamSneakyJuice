@@ -1,6 +1,6 @@
 #include "SpriteLibrary.h"
 
-Sprite** SpriteLibrary::_libraryFile = new Sprite*[TOTAL_SPRITES];
+Sprite** SpriteLibrary::_libraryFile = new Sprite*[];
 
 
 SpriteLibrary::SpriteLibrary(void)
@@ -10,6 +10,7 @@ SpriteLibrary::SpriteLibrary(void)
 
 SpriteLibrary::~SpriteLibrary(void)
 {
+	delete _libraryFile;
 }
 
 void SpriteLibrary::Initialise(void)
@@ -33,6 +34,7 @@ void SpriteLibrary::Initialise(void)
 	_libraryFile[HEART_AND_BALL] = new Sprite("Assets/Images/rotatebase.png");
 	_libraryFile[DOUBLE_BALL] = new Sprite("Assets/Images/rotatebase.png");
 	_libraryFile[LADDER] = new Sprite("Assets/Images/ladder.png");
+	_libraryFile[H_SPIKES_FLIPPED] = new Sprite("Assets/Images/spikes_right.png");
 	_libraryFile[HEART_END] = new Sprite("Assets/Images/heart.png");
 	_libraryFile[SPIKE_END] = new Sprite("Assets/Images/spikeyball.png");
 	_libraryFile[SPIN_CHAIN] = new Sprite("Assets/Images/SpinChain.png");

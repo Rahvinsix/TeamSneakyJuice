@@ -1,7 +1,7 @@
 #pragma once
 #include "Sprite.h"
 
-#define TOTAL_SPRITES 5
+#define TOTAL_SPRITES 23
 
 
 class SpriteLibrary
@@ -37,6 +37,7 @@ public:
 		HEART_AND_BALL,
 		DOUBLE_BALL,
 		LADDER,
+		H_SPIKES_FLIPPED,
 		HEART_END,
 		SPIKE_END,
 		SPIN_CHAIN
