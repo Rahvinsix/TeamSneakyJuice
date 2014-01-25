@@ -7,6 +7,7 @@
 #include "LevelClass.h"
 #include "Player.h"
 #include <sstream>
+#include <iostream>
 
 #define TOTAL_LEVELS 2
 
@@ -31,6 +32,8 @@ private:
 	bool _gameEnded;
 
 	int _currentLevel;
+	int _doori;
+	int _doorj;
 	std::string* _levelNames;
 	
 
