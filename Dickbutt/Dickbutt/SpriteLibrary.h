@@ -41,7 +41,14 @@ public:
 		H_SPIKES_FLIPPED,
 		HEART_END,
 		SPIKE_END,
-		SPIN_CHAIN
+		SPIN_CHAIN,
+		HEART0,
+		HEART1,
+		HEART2,
+		HEART3,
+		HEART4,
+		HEART5,
+		HEART6
 	};
 
 	static Sprite* _libraryFile[TOTAL_SPRITES];

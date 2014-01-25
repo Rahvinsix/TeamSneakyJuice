@@ -23,6 +23,17 @@ Application::Application(void)
 	_font->loadFromFile("Assets/Fonts/arial.ttf");
 
 	
+	sf::Music music;
+	if (!music.openFromFile("Assets/Sounds/track01.ogg"))
+	{
+		printf("Error loading musics");
+	}
+    
+	music.play();
+	music.setLoop(true);
+	
+
+	
     while (_window->isOpen())
     {
 		Update();
@@ -38,6 +49,32 @@ void Application::Update()
 	_timeSinceLastUpdate = _updateTime.getElapsedTime().asSeconds();
 	_updateTime.restart();
 
+	
+	switch(_player->checkHearts())
+	{
+		case 0 :
+			_level->SetTileAt(_doori,_doorj,SpriteLibrary::HEART0);
+			break;
+		case 1:
+			_level->SetTileAt(_doori,_doorj,SpriteLibrary::HEART1);
+			break;
+		case 2:
+			_level->SetTileAt(_doori,_doorj,SpriteLibrary::HEART2);
+			break;
+		case 3:
+			_level->SetTileAt(_doori,_doorj,SpriteLibrary::HEART3);
+			break;
+		case 4:
+			_level->SetTileAt(_doori,_doorj,SpriteLibrary::HEART4);
+			break;
+		case 5:
+			_level->SetTileAt(_doori,_doorj,SpriteLibrary::HEART5);
+			break;
+		case 6:
+			_level->SetTileAt(_doori,_doorj,SpriteLibrary::HEART6);
+			break;
+	}	
+	
 	if(_player->_playerFacing)
 	{
 		for(int i = 0; i < _level->Width();i++)
@@ -94,6 +131,10 @@ void Application::Update()
 			switch(_level->TileAt(i, j)->GetSpriteID())
 			{
 			case SpriteLibrary::GROUND:
+			case SpriteLibrary::DOUBLE_BALL:
+			case SpriteLibrary::HEART_AND_BALL:
+			case SpriteLibrary::SPIKE_BALL:
+			case SpriteLibrary::HEART:
 				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)))
 				{
 					_player->MoveBy(sf::Vector2f(-(_player->GetVelocity().x),0.0f));
@@ -107,7 +148,7 @@ void Application::Update()
 			case SpriteLibrary::DOOR:
 				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
 				{
-					if(_level->LevelComplete())
+					if(_player->checkHearts() == 2)
 					{
 						_currentLevel++;
 						if(_currentLevel <= TOTAL_LEVELS)
@@ -123,15 +164,36 @@ void Application::Update()
 			case SpriteLibrary::LAVA_4:
 			case SpriteLibrary::LAVA_5:
 			case SpriteLibrary::LAVA_6:
-			case SpriteLibrary::H_SPIKES:
-			case SpriteLibrary::V_SPIKES:
-			case SpriteLibrary::H_SPIKES_FLIPPED:
 				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
 				{
 					_player->Death();
 					printf("DEAD");
+				}   
+				break;
+			case SpriteLibrary::H_SPIKES:
+			case SpriteLibrary::H_SPIKES_FLIPPED:
+				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)))
+				{
+					_player->Death();
+				}
+				else if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)))
+				{
+					_player->MoveBy(sf::Vector2f(0.0f,-(_player->GetVelocity().y)));
+					_player->VerticalCollision();
 				}
 				break;
+			case SpriteLibrary::V_SPIKES:
+				if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)))
+				{
+					_player->Death();
+				}
+				else if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)))
+				{
+					_player->MoveBy(sf::Vector2f(0.0f,-(_player->GetVelocity().y)));
+					
+				}
+				break;
+			
 			case SpriteLibrary::LADDER:
 				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
 				{
@@ -154,8 +216,7 @@ void Application::Update()
 		
 			i->GetGameObject()->SetSpriteID(SpriteLibrary::AIR);
 			_player->addHeart();
-			printf("Hearts %d\n",_player->checkHearts());
-
+			
 		}
 	
 	}
@@ -224,6 +285,13 @@ void Application::StartLevel()
 				_player->SetPosition(_level->TileAt(i, j)->GetPosition());
 				_player->setSpawn(_level->TileAt(i, j)->GetPosition());
 				_level->SetTileAt(i, j, SpriteLibrary::AIR);
+			}
+			if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::DOOR)
+			{
+				_level->TileAt(i,j-1)->SetSpriteID(SpriteLibrary::HEART0);
+				_doori = i;
+				_doorj = j-1;
+			
 			}
 		}
 	}

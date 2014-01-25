@@ -103,12 +103,6 @@ void LevelClass::SetTileAt(int x, int y, int num)
 	_levelGrid[x][y].SetSpriteID(num);
 }
 
-bool LevelClass::LevelComplete()
-{
-	// todo: Check if all collectables collected
-	return true;
-}
-
 int LevelClass::Width()
 {
 	return _width;

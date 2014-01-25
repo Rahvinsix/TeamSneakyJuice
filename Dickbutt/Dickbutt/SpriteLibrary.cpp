@@ -37,6 +37,13 @@ void SpriteLibrary::Initialise(void)
 	_libraryFile[HEART_END] = new Sprite("Assets/Images/heart.png");
 	_libraryFile[SPIKE_END] = new Sprite("Assets/Images/spikeyball.png");
 	_libraryFile[SPIN_CHAIN] = new Sprite("Assets/Images/SpinChain.png");
+	_libraryFile[HEART0] = new Sprite("Assets/Images/levelend_heart0outof6.png");
+	_libraryFile[HEART1] = new Sprite("Assets/Images/levelend_heart1outof6.png");
+	_libraryFile[HEART2] = new Sprite("Assets/Images/levelend_heart2outof6.png");
+	_libraryFile[HEART3] = new Sprite("Assets/Images/levelend_heart3outof6.png");
+	_libraryFile[HEART4] = new Sprite("Assets/Images/levelend_heart4outof6.png");
+	_libraryFile[HEART5] = new Sprite("Assets/Images/levelend_heart5outof6.png");
+	_libraryFile[HEART6] = new Sprite("Assets/Images/levelend_heart6outof6.png");
 }
 
 sf::Sprite SpriteLibrary::GetSprite(int spriteID)

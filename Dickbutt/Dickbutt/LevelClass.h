@@ -20,7 +20,7 @@ public:
 	GameObject* TileAt(int, int);
 	void SetTileAt(int, int, int);
 
-	bool LevelComplete();
+
 
 	int Width();
 	int Height();
