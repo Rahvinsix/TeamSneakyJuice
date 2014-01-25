@@ -23,6 +23,8 @@ private:
 	float _timeSinceLastUpdate;
 
 	bool _gameEnded;
+
+	
 	LevelClass* _level;
 	Player* _player;
 };

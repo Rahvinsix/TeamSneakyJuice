@@ -8,6 +8,7 @@ Player::Player(void)
 	gravity = 2.0f;
 	jumpFrames = 0;
 	onGround = false;
+	_playerFacing = true;
 }
 
 
@@ -19,13 +20,16 @@ void Player::Update(void)
 {
 	
 	SetVelocity(sf::Vector2f(0.0f,0.0f));
+
 	if(Input::IsDown(sf::Keyboard::D))
 	{
 		SetVelocity(sf::Vector2f(2.0f,0.0f));
+		_playerFacing = true;
 	}
 	else if(Input::IsDown(sf::Keyboard::A))
 	{
 		SetVelocity(sf::Vector2f(-2.0f,0.0f));
+		_playerFacing = false;
 	}
 	if(Input::IsDown(sf::Keyboard::Space) && jumpFrames == 0 && onGround)
 	{

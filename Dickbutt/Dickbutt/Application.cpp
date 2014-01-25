@@ -29,6 +29,83 @@ void Application::Update()
 	_timeSinceLastUpdate = _updateTime.getElapsedTime().asSeconds();
 	_updateTime.restart();
 
+	if(_player->_playerFacing == true)
+	{
+		for(int i = 0; i < _level->Width();i++)
+		{
+			for(int j = 0;j < _level->Height(); j++)
+			{
+				if((_level->TileAt(i, j)->GetSpriteID() != SpriteLibrary::AIR) && (_level->TileAt(i, j)->GetPosition().x > _player->GetPosition().x))
+				{
+			
+					_level->TileAt(i, j)->seen = true;
+
+				}
+				else
+				{
+				
+					_level->TileAt(i, j)->seen = false;
+
+				}
+			}
+		}
+
+		for(std::vector<SpinningObject>::iterator i = _level->_spinningObjects.begin();i!= _level->_spinningObjects.end();i++)
+		{
+	
+			if(i->GetGameObject()->GetPosition().x > _player->GetPosition().x)
+			{
+		
+				i->GetGameObject()->seen = true;
+			}
+			else
+			{
+			
+				i->GetGameObject()->seen = false;
+			}
+	
+		}
+	}
+	else if(_player->_playerFacing == false)
+	{
+		for(int i = 0; i < _level->Width();i++)
+		{
+			for(int j = 0;j < _level->Height(); j++)
+			{
+				if((_level->TileAt(i, j)->GetSpriteID() != SpriteLibrary::AIR) && (_level->TileAt(i, j)->GetPosition().x < _player->GetPosition().x))
+				{
+					
+					
+					_level->TileAt(i, j)->seen = true;
+
+				}
+				else
+				{
+				
+					_level->TileAt(i, j)->seen = false;
+
+				}
+			}
+		}
+
+		for(std::vector<SpinningObject>::iterator i = _level->_spinningObjects.begin();i!= _level->_spinningObjects.end();i++)
+		{
+	
+			if(i->GetGameObject()->GetPosition().x < _player->GetPosition().x)
+			{
+		
+				i->GetGameObject()->seen = true;
+
+			}
+			else
+			{
+			
+				i->GetGameObject()->seen = false;
+
+			}
+	
+		}
+	}
 
 	//Update player input
 	Input::Update();
