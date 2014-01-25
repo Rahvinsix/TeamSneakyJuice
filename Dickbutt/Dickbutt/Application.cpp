@@ -124,6 +124,22 @@ void Application::Update()
 	sf::FloatRect spriteSize = SpriteLibrary::GetSprite(0).getLocalBounds();
 	sf::Vector2i playerTilePos(int(_player->GetCentre().x / spriteSize.width), int(_player->GetCentre().y / spriteSize.height));
 
+	for(int i = MAX(playerTilePos.x - 2, 0); i < MIN(_level->Width(), playerTilePos.x + 2); i++)
+		for(int j = MAX(playerTilePos.y - 2, 0); j < MIN(_level->Height(), playerTilePos.y + 2); j++)
+			if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::LADDER)
+				if(!_player->_onLadder)
+				{
+					if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
+					{
+						_player->_onLadder = true;
+					}
+					if(_level->TileAt(i, j-1)->GetSpriteID() == SpriteLibrary::AIR && playerTilePos.y == j-1)
+						if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)) && _player->GetVelocity().y < 0)
+						{
+							_player->VerticalCollision();
+						}
+				}
+
 	for(int i = MAX(playerTilePos.x - 2, 0); i < MIN(_level->Width(), playerTilePos.x + 2);i++)
 	{
 		for(int j = MAX(playerTilePos.y - 2, 0);j < MIN(_level->Height(), playerTilePos.y + 2); j++)
@@ -135,9 +151,9 @@ void Application::Update()
 			case SpriteLibrary::HEART_AND_BALL:
 			case SpriteLibrary::SPIKE_BALL:
 			case SpriteLibrary::HEART:
-				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)))
+				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j), _player->_onLadder))
 				{
-					_player->MoveBy(sf::Vector2f(-(_player->GetVelocity().x),0.0f));
+					_player->MoveBy(sf::Vector2f(-(_player->GetVelocity().x),(_player->_onLadder ? -2.0f : 0.0f)));
 				}
 				if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)))
 				{
@@ -191,17 +207,6 @@ void Application::Update()
 				{
 					_player->MoveBy(sf::Vector2f(0.0f,-(_player->GetVelocity().y)));
 					
-				}
-				break;
-			
-			case SpriteLibrary::LADDER:
-				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
-				{
-					_player->_onLadder = true;
-				}
-				else
-				{
-					_player->_onLadder = false;				
 				}
 				break;
 			}

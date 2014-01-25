@@ -34,7 +34,7 @@ void Player::Update(void)
 		SetVelocity(sf::Vector2f(-2.0f,0.0f));
 		_playerFacing = false;
 	}
-	if(Input::IsDown(sf::Keyboard::Space) && jumpFrames == 0 && onGround && !_onLadder)
+	if(Input::IsDown(sf::Keyboard::Space) && jumpFrames == 0 && (onGround || _onLadder))
 	{
 		jumpFrames = 40;
 		onGround = false;
@@ -48,13 +48,6 @@ void Player::Update(void)
 	{
 		jumpFrames--;
 		DeltaVy(-5.0f);
-	}
-
-	if(_playerFacing)
-	{
-	
-		
-	
 	}
 
 	if(!_onLadder)
@@ -76,6 +69,7 @@ void Player::Update(void)
 	}
 	Move();
 	
+	_onLadder = false;
 }
 
 void Player::VerticalCollision()
