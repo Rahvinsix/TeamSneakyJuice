@@ -136,6 +136,15 @@ void Application::Update()
 					_player->VerticalCollision();
 				}
 			}
+			else if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::DOOR)
+			{
+				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
+				{
+		
+					printf("DOOR COLLIDE\N");
+
+				}
+			}
 		}
 	}
 
