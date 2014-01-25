@@ -26,6 +26,7 @@ Application::Application(void)
 			{
 				_player->SetSpriteID(_level->TileAt(i, j)->GetSpriteID());
 				_player->SetPosition(_level->TileAt(i, j)->GetPosition());
+				_player->setSpawn(_level->TileAt(i, j)->GetPosition());
 				_level->SetTileAt(i, j, SpriteLibrary::AIR);
 			}
 		}
@@ -121,7 +122,7 @@ void Application::Update()
 				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
 				{
 		
-					printf("DOOR COLLIDE\N");
+					_player->Death();
 
 				}
 			}
@@ -135,6 +136,15 @@ void Application::Update()
 				else
 				{
 					_player->_onLadder = false;				
+				}
+			}
+			else if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::LAVA_1)
+			{
+			
+				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
+				{
+					_player->Death();
+					printf("DEAD");
 				}
 			}
 		}

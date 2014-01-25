@@ -12,11 +12,13 @@ public:
 	void DrawPlayer(sf::RenderWindow* window);
 	bool _onLadder;
 	void VerticalCollision();
+	void Death(void);
+	void setSpawn(sf::Vector2f vector);
 
 private:
 	float gravity;
 	int jumpFrames;
-
+	sf::Vector2f _playerSpawn;
 	bool onGround;
 	
 };

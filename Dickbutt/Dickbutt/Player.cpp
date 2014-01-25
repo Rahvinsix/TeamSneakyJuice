@@ -4,7 +4,8 @@
 Player::Player(void)
 {
 	
-	
+	_playerSpawn.x = 0.0f;
+	_playerSpawn.y = 0.0f;
 	gravity = 2.0f;
 	jumpFrames = 0;
 	onGround = false;
@@ -94,4 +95,18 @@ void Player::DrawPlayer(sf::RenderWindow* window)
 	}
 	
 	window->draw(playerSprite);
+}
+
+void Player::Death(void)
+{
+
+	SetPosition(sf::Vector2f(_playerSpawn.x,_playerSpawn.y));
+
+}
+
+void Player::setSpawn(sf::Vector2f vector)
+{
+
+	_playerSpawn = vector;
+
 }
