@@ -15,11 +15,12 @@ MapGrid::MapGrid(std::string fileName, int width, int height)
 		if(file)
 			std::getline(file, currentLine);
 		map[i] = new int[_mapHeight];
-		for(int j = 0; j < _mapHeight; j++)
-			if(!file)
-				map[i][j] = 0;
-			else
-				map[i][j] = currentLine.at(j)-48;
+		for(int j = 0; j < _mapHeight*2; j+=2)
+		{
+			map[i][j/2] = 0;
+			if(file && !file.eof() && j < currentLine.length())
+				map[i][j/2] = (currentLine.at(j)-48)*10 + currentLine.at(j+1)-48;
+		}
 	}
 }
 
@@ -31,7 +32,11 @@ MapGrid::~MapGrid(void)
 	for(int i = 0; i < _mapWidth; i++)
 	{
 		for(int j = 0; j < _mapHeight; j++)
+		{
+			if(map[i][j] < 10)
+				file << 0;
 			file << map[i][j];
+		}
 		file << "\n";
 	}
 

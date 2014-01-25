@@ -2,7 +2,7 @@
 
 #include "Sprite.h"
 
-#define TOTAL_SPRITES 16
+#define TOTAL_SPRITES 18
 
 
 class SpriteLibrary
