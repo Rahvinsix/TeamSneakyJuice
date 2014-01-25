@@ -31,3 +31,8 @@ sf::Sprite Sprite::GetSprite()
 
 	return sprite;
 }
+
+sf::Texture Sprite::GetTexture()
+{
+	return *tex;
+}

@@ -51,13 +51,29 @@ void LevelClass::Update()
 		spinObj->Update();
 }
 
-void LevelClass::Draw(sf::RenderWindow* window)
+void LevelClass::Draw(sf::RenderWindow* window, sf::Vector2f playerCentre)
 {
-	for(int i = 0; i < _width; i++)
+	sf::FloatRect spriteSize = SpriteLibrary::GetSprite(0).getLocalBounds();
+	sf::Vector2i playerTilePos(int(playerCentre.x / spriteSize.width), int(playerCentre.y / spriteSize.height));
+	
+	sf::Texture background = SpriteLibrary::GetTexture(SpriteLibrary::AIR);
+	sf::Sprite backgroundSprite;
+	
+	background.setRepeated(true);
+	
+	backgroundSprite.setTexture(background);
+	backgroundSprite.setOrigin(spriteSize.width / 2, spriteSize.height / 2);
+	backgroundSprite.move(playerCentre);
+	backgroundSprite.setScale(800/spriteSize.width, 600/spriteSize.height);
+
+	window->draw(backgroundSprite);
+
+	for(int i = MAX(playerTilePos.x - 14, 0); i < MIN(_width, playerTilePos.x + 14);i++)
 	{
-		for(int j = 0; j < _height; j++)
-		{	
-			_levelGrid[i][j].Draw(window);
+		for(int j = MAX(playerTilePos.y - 11, 0);j < MIN(_height, playerTilePos.y + 11); j++)
+		{
+			if(_levelGrid[i][j].GetSpriteID() != SpriteLibrary::AIR)
+				_levelGrid[i][j].Draw(window);
 		}
 	}
 

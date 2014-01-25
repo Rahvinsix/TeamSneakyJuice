@@ -33,6 +33,8 @@ void Application::Update()
 	_timeSinceLastUpdate = _updateTime.getElapsedTime().asSeconds();
 	_updateTime.restart();
 
+	printf("FPS: %f\n", _timeSinceLastUpdate);
+
 	if(_player->_playerFacing == true)
 	{
 		for(int i = 0; i < _level->Width();i++)
@@ -115,9 +117,12 @@ void Application::Update()
 	Input::Update();
 	_player->Update();
 
-	for(int i = 0; i < _level->Width();i++)
+	sf::FloatRect spriteSize = SpriteLibrary::GetSprite(0).getLocalBounds();
+	sf::Vector2i playerTilePos(int(_player->GetCentre().x / spriteSize.width), int(_player->GetCentre().y / spriteSize.height));
+
+	for(int i = MAX(playerTilePos.x - 2, 0); i < MIN(_level->Width(), playerTilePos.x + 2);i++)
 	{
-		for(int j = 0;j < _level->Height(); j++)
+		for(int j = MAX(playerTilePos.y - 2, 0);j < MIN(_level->Height(), playerTilePos.y + 2); j++)
 		{
 			if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::GROUND)
 			{
@@ -173,7 +178,7 @@ void Application::Draw()
 {
     _window->clear(sf::Color(255, 255, 255, 255));
 
-	_level->Draw(_window);
+	_level->Draw(_window, _player->GetCentre());
 	_player->Draw(_window);
 
     _window->display();

@@ -42,3 +42,8 @@ sf::Sprite SpriteLibrary::GetSprite(int spriteID)
 {
 	return _libraryFile[spriteID]->GetSprite();
 }
+
+sf::Texture SpriteLibrary::GetTexture(int spriteID)
+{
+	return _libraryFile[spriteID]->GetTexture();
+}

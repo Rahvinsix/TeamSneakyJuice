@@ -13,6 +13,7 @@ public:
 	static void Initialise(void);
 
 	static sf::Sprite GetSprite(int);
+	static sf::Texture GetTexture(int);
 
 	
 	enum

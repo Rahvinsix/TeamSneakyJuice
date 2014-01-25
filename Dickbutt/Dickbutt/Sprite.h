@@ -10,6 +10,7 @@ public:
 	~Sprite(void);
 
 	sf::Sprite GetSprite();
+	sf::Texture GetTexture();
 
 private:
 	sf::Texture* tex;
