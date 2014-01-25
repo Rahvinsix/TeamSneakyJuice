@@ -31,6 +31,8 @@ public:
 	void Draw(sf::RenderWindow*);
 	void DeltaVy(float vy);
 
+	void PlayerSight(float playerX, bool playerDirection);
+
 	enum
 	{
 		V_COLLISION,
@@ -46,5 +48,8 @@ private:
 	sf::Vector2f _velocity;
 	sf::Vector2f _position;
 	float _rotation;
+
+	float _playerSight;
+	bool _playerDirec;
 };
 

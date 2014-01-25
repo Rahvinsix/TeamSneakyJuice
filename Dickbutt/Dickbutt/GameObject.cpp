@@ -37,18 +37,52 @@ GameObject* GameObject::SetRotation(float rot)
 
 void GameObject::Draw(sf::RenderWindow* window)
 {
-	sf::Sprite renderSprite = SpriteLibrary::GetSprite(seen ? SpriteLibrary::PLAYER : spriteID);
+	sf::Sprite mySprite = SpriteLibrary::GetSprite(spriteID);
+	sf::Sprite playerSprite = SpriteLibrary::GetSprite(SpriteLibrary::PLAYER);
 
-	renderSprite.setPosition(_position);
+	mySprite.setPosition(_position);
+	playerSprite.setPosition(_position);
 
 	if(_rotation != 0)
 	{
-		renderSprite.setOrigin(renderSprite.getLocalBounds().width / 2, renderSprite.getLocalBounds().height / 2);
-		renderSprite.setRotation(_rotation);
-		renderSprite.move(renderSprite.getLocalBounds().width / 2, renderSprite.getLocalBounds().height / 2);
-	}
+		mySprite.setOrigin(mySprite.getLocalBounds().width / 2, mySprite.getLocalBounds().height / 2);
+		mySprite.setRotation(_rotation);
+		mySprite.move(mySprite.getLocalBounds().width / 2, mySprite.getLocalBounds().height / 2);
 
-	window->draw(renderSprite);
+		playerSprite.setOrigin(playerSprite.getLocalBounds().width / 2, playerSprite.getLocalBounds().height / 2);
+		playerSprite.setRotation(_rotation);
+		playerSprite.move(playerSprite.getLocalBounds().width / 2, playerSprite.getLocalBounds().height / 2);
+
+		if((_playerSight > _position.x && !_playerDirec) || (_playerSight < _position.x && _playerDirec))
+			window->draw(playerSprite);
+		else
+			window->draw(mySprite);
+		return;
+	}
+	else
+		if(!_playerDirec)
+		{
+			if(_playerSight - _position.x > 0 && _playerSight - _position.x < mySprite.getLocalBounds().width)
+			{
+				sf::FloatRect spriteBounds = mySprite.getLocalBounds();
+				sf::IntRect newSprite(spriteBounds.left + (_playerSight - _position.x), spriteBounds.top, spriteBounds.width - (_playerSight - _position.x), spriteBounds.height);
+				mySprite.setTextureRect(newSprite);
+				mySprite.move(sf::Vector2f((_playerSight - _position.x), 0));
+			}
+		}
+		else
+		{
+			_playerSight -= mySprite.getLocalBounds().width;
+			if(_position.x - _playerSight > 0 && _position.x - _playerSight < mySprite.getLocalBounds().width)
+			{
+				sf::FloatRect spriteBounds = mySprite.getLocalBounds();
+				sf::IntRect newSprite(spriteBounds.left, spriteBounds.top, spriteBounds.width - (_position.x - _playerSight), spriteBounds.height);
+				mySprite.setTextureRect(newSprite);
+			}
+		}
+	window->draw(playerSprite);
+	if(!(!_playerDirec && _playerSight - _position.x >= 32) && !(_playerDirec && _position.x - _playerSight >= 32))
+		window->draw(mySprite);
 }
 
 GameObject* GameObject::SetVelocity(sf::Vector2f velocity)
@@ -142,4 +176,10 @@ void GameObject::MoveBy(sf::Vector2f vector)
 void GameObject::DeltaVy(float vy)
 {
 	_velocity.y += vy;
+}
+
+void GameObject::PlayerSight(float sightX, bool direc)
+{
+	_playerSight = sightX;
+	_playerDirec = direc;
 }
