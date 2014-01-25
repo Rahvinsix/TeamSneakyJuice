@@ -14,12 +14,14 @@ public:
 	void VerticalCollision();
 	void Death(void);
 	void setSpawn(sf::Vector2f vector);
-
+	void addHeart(void);
+	int checkHearts(void);
 private:
 	float gravity;
 	int jumpFrames;
 	sf::Vector2f _playerSpawn;
 	bool onGround;
+	int hearts;
 	
 };
 

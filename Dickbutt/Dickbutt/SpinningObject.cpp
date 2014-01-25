@@ -58,7 +58,10 @@ void SpinningObject::Draw(sf::RenderWindow* window)
 
 	_gameObject.SetRotation((_angleStage*180/3.142)+90);
 
-	_gameObject.Draw(window);
+	if(_gameObject.GetSpriteID()!=SpriteLibrary::AIR)
+	{
+		_gameObject.Draw(window);
+	}
 }
 
 GameObject* SpinningObject::GetGameObject(void)

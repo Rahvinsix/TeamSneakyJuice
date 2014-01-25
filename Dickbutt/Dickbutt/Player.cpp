@@ -11,6 +11,7 @@ Player::Player(void)
 	onGround = false;
 	_playerFacing = true;
 	_onLadder = false;
+	hearts = 0;
 }
 
 
@@ -108,5 +109,16 @@ void Player::setSpawn(sf::Vector2f vector)
 {
 
 	_playerSpawn = vector;
+
+}
+
+void Player::addHeart(void)
+{
+	hearts++;
+}
+int Player::checkHearts(void)
+{
+
+	return hearts;
 
 }

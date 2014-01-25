@@ -122,7 +122,7 @@ void Application::Update()
 				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
 				{
 		
-					_player->Death();
+					printf("DOOR COLLIDE\n");
 
 				}
 			}
@@ -153,10 +153,12 @@ void Application::Update()
 	for(std::vector<SpinningObject>::iterator i = _level->_spinningObjects.begin();i!= _level->_spinningObjects.end();i++)
 	{
 	
-		if(GameObject::CheckCollide(_player, i->GetGameObject()))
+		if((GameObject::CheckCollide(_player, i->GetGameObject())) && (i->GetGameObject()->GetSpriteID() == SpriteLibrary::HEART_END))
 		{
 		
-			printf("Collide with spinner");
+			i->GetGameObject()->SetSpriteID(SpriteLibrary::AIR);
+			_player->addHeart();
+			printf("Hearts %d\n",_player->checkHearts());
 
 		}
 	
