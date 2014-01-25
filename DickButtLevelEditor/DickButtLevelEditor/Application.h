@@ -5,6 +5,8 @@
 #include "MapGrid.h"
 #include "SpriteLibrary.h"
 #include "TileGrid.h"
+#include <fstream>
+#include <sstream>
 
 
 class Application
@@ -17,10 +19,12 @@ private:
 
 	bool gameEnded;
 
-	MapGrid mapGrid;
+	MapGrid* mapGrid;
 	TileGrid tileGrid;
 	
 	bool mouseDown;
+
+	std::string fileName;
 
 
 	void Update();

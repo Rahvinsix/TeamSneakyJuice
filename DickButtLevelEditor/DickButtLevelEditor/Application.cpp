@@ -5,10 +5,20 @@ Application::Application(void)
 {
 	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Team Sneaky Juice Level Editor");
 
+	SpriteLibrary::Initialise();
+
 	gameEnded = false;
 	mouseDown = false;
-	
-	SpriteLibrary::Initialise();
+
+	std::ifstream myReadFile;
+	myReadFile.open("levelDetails.txt");
+	std::getline(myReadFile, fileName);
+	std::string width;
+	std::getline(myReadFile, width);
+	std::string height;
+	std::getline(myReadFile, height);
+
+	mapGrid = new MapGrid(fileName, atoi(width.c_str()), atoi(height.c_str()));
 	
     while (window->isOpen())
     {
@@ -39,7 +49,7 @@ void Application::Update()
 			break;
 		case sf::Event::MouseMoved:
 			if(mouseDown)
-				mapGrid.Click(event.mouseMove, tileGrid.CurrentTile());
+				mapGrid->Click(event.mouseMove, tileGrid.CurrentTile());
 		}
     }
 
@@ -49,7 +59,7 @@ void Application::Draw()
 {
     window->clear(sf::Color(255, 255, 255, 255));
 
-	mapGrid.Draw(window);
+	mapGrid->Draw(window);
 	tileGrid.Draw(window);
 
     window->display();
@@ -57,5 +67,6 @@ void Application::Draw()
 
 Application::~Application(void)
 {
+	delete mapGrid;
 	delete window;
 }

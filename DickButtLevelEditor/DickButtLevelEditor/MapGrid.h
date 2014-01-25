@@ -3,18 +3,17 @@
 #include "GameObject.h"
 #include "Sprite.h"
 #include "SpriteLibrary.h"
+#include <string>
+#include <fstream>
 
 #define MAP_SCREEN_WIDTH 400
 #define MAP_SCREEN_HEIGHT 400
-
-#define MAP_WIDTH 20
-#define MAP_HEIGHT 10
 
 
 class MapGrid
 {
 public:
-	MapGrid(void);
+	MapGrid(std::string fileName, int width, int height);
 	~MapGrid(void);
 
 	void Draw(sf::RenderWindow*);
@@ -25,6 +24,11 @@ private:
 	int** map;
 
 	sf::FloatRect spriteSize;
+
+	std::string _fileName;
+
+	int _mapWidth;
+	int _mapHeight;
 
 };
 

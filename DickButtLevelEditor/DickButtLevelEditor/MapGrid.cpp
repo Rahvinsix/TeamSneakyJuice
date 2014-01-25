@@ -1,35 +1,56 @@
 #include "MapGrid.h"
 
 
-MapGrid::MapGrid(void)
+MapGrid::MapGrid(std::string fileName, int width, int height)
 {
-	map = new int*[MAP_WIDTH];
-	for(int i = 0; i < MAP_WIDTH; i++)
+	_mapWidth = width;
+	_mapHeight = height;
+	_fileName = fileName;
+	std::ifstream file(_fileName);
+	std::string currentLine;
+
+	map = new int*[_mapWidth];
+	for(int i = 0; i < _mapWidth; i++)
 	{
-		map[i] = new int[MAP_HEIGHT];
-		for(int j = 0; j < MAP_HEIGHT; j++)
-			map[i][j] = i % 2;
+		if(file)
+			std::getline(file, currentLine);
+		map[i] = new int[_mapHeight];
+		for(int j = 0; j < _mapHeight; j++)
+			if(!file)
+				map[i][j] = 0;
+			else
+				map[i][j] = currentLine.at(j)-48;
 	}
 }
 
 
 MapGrid::~MapGrid(void)
 {
+	std::ofstream file(_fileName);
+
+	for(int i = 0; i < _mapWidth; i++)
+	{
+		for(int j = 0; j < _mapHeight; j++)
+			file << map[i][j];
+		file << "\n";
+	}
+
+	file.close();
 }
 
 void MapGrid::Draw(sf::RenderWindow* window)
 {
 	spriteSize = SpriteLibrary::GetSprite(0).getLocalBounds();
 
-	float mapSize = MAP_SCREEN_WIDTH / MAP_WIDTH;
-	if(mapSize > MAP_SCREEN_HEIGHT / MAP_HEIGHT)
-		mapSize = MAP_SCREEN_HEIGHT / MAP_HEIGHT;
+	float mapSize = MAP_SCREEN_WIDTH / _mapWidth;
+	if(mapSize > MAP_SCREEN_HEIGHT / _mapHeight)
+		mapSize = MAP_SCREEN_HEIGHT / _mapHeight;
 
 	spriteSize.width = mapSize;
 	spriteSize.height = mapSize;
 
-	for(int i = 0; i < MAP_WIDTH; i++)
-		for(int j = 0; j < MAP_HEIGHT; j++)
+	for(int i = 0; i < _mapWidth; i++)
+		for(int j = 0; j < _mapHeight; j++)
 		{
 			sf::Sprite sprite = SpriteLibrary::GetSprite(map[i][j]);
 			sprite.setPosition(spriteSize.width * i, spriteSize.height * j);
@@ -40,6 +61,6 @@ void MapGrid::Draw(sf::RenderWindow* window)
 
 void MapGrid::Click(sf::Event::MouseMoveEvent mE, int currentTile)
 {
-	if(mE.x < spriteSize.width * MAP_WIDTH && mE.x >= 0 && mE.y < spriteSize.height * MAP_HEIGHT && mE.y >= 0)
+	if(mE.x < spriteSize.width * _mapWidth && mE.x >= 0 && mE.y < spriteSize.height * _mapHeight && mE.y >= 0)
 		map[int(mE.x / spriteSize.width)][int(mE.y / spriteSize.height)] = currentTile;
 }
