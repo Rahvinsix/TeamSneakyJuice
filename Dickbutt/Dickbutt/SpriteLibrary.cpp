@@ -44,6 +44,7 @@ void SpriteLibrary::Initialise(void)
 	_libraryFile[HEART4] = new Sprite("Assets/Images/levelend_heart4outof6.png");
 	_libraryFile[HEART5] = new Sprite("Assets/Images/levelend_heart5outof6.png");
 	_libraryFile[HEART6] = new Sprite("Assets/Images/levelend_heart6outof6.png");
+	_libraryFile[DOOR_OPEN] = new Sprite("Assets/Images/levelend_open.png");
 }
 
 sf::Sprite SpriteLibrary::GetSprite(int spriteID)

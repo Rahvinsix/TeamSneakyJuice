@@ -48,7 +48,8 @@ public:
 		HEART3,
 		HEART4,
 		HEART5,
-		HEART6
+		HEART6,
+		DOOR_OPEN
 	};
 
 	static Sprite* _libraryFile[TOTAL_SPRITES];

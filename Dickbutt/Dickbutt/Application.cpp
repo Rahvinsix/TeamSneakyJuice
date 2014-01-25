@@ -72,6 +72,7 @@ void Application::Update()
 			break;
 		case 6:
 			_level->SetTileAt(_doori,_doorj,SpriteLibrary::HEART6);
+			_level->SetTileAt(_doori,_doorj+1,SpriteLibrary::DOOR_OPEN);
 			break;
 	}	
 	
@@ -161,10 +162,10 @@ void Application::Update()
 					_player->VerticalCollision();
 				}
 				break;
-			case SpriteLibrary::DOOR:
+			case SpriteLibrary::DOOR_OPEN:
 				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
 				{
-					if(_player->checkHearts() == 2)
+					if(_player->checkHearts() == 6)
 					{
 						_currentLevel++;
 						if(_currentLevel <= TOTAL_LEVELS)
@@ -221,7 +222,7 @@ void Application::Update()
 		
 			i->GetGameObject()->SetSpriteID(SpriteLibrary::AIR);
 			_player->addHeart();
-			
+			printf("Hearts: %d",_player->checkHearts());
 		}
 	
 	}
