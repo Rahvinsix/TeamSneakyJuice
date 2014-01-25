@@ -25,7 +25,6 @@ private:
 
 
 	sf::RenderWindow* _window;
-	sf::Font* _font;
 
 	float _timeSinceLastUpdate;
 
@@ -34,8 +33,10 @@ private:
 	int _currentLevel;
 	std::string* _levelNames;
 	
+
 	LevelClass* _level;
 	Player* _player;
 	sf::View* _camera;
+	sf::Font* _font;
 };
 

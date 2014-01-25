@@ -11,6 +11,7 @@ Application::Application(void)
 
 	Input::Initialise();
 	_gameEnded = false;
+	
 
 	_camera = new sf::View(sf::FloatRect(0, 0, 800, 600));
 	_window->setView(*_camera);
@@ -117,6 +118,31 @@ void Application::Update()
 					}
 				}
 				break;
+			case SpriteLibrary::LAVA_1:
+			case SpriteLibrary::LAVA_2:
+			case SpriteLibrary::LAVA_3:
+			case SpriteLibrary::LAVA_4:
+			case SpriteLibrary::LAVA_5:
+			case SpriteLibrary::LAVA_6:
+			case SpriteLibrary::H_SPIKES:
+			case SpriteLibrary::V_SPIKES:
+			case SpriteLibrary::H_SPIKES_FLIPPED:
+				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
+				{
+					_player->Death();
+					printf("DEAD");
+				}
+				break;
+			case SpriteLibrary::LADDER:
+				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
+				{
+					_player->_onLadder = true;
+				}
+				else
+				{
+					_player->_onLadder = false;				
+				}
+				break;
 			}
 		}
 	}
@@ -195,6 +221,7 @@ void Application::StartLevel()
 			{
 				_player->SetSpriteID(_level->TileAt(i, j)->GetSpriteID());
 				_player->SetPosition(_level->TileAt(i, j)->GetPosition());
+				_player->setSpawn(_level->TileAt(i, j)->GetPosition());
 				_level->SetTileAt(i, j, SpriteLibrary::AIR);
 			}
 		}
