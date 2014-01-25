@@ -3,19 +3,19 @@
 
 Application::Application(void)
 {
-	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Team Sneaky Juice");
+	_window = new sf::RenderWindow(sf::VideoMode(800, 600), "Team Sneaky Juice");
 
 	SpriteLibrary::Initialise();
-	level = new LevelClass();
-	gameEnded = false;
+	_level = new LevelClass();
+	_gameEnded = false;
 	
-    while (window->isOpen())
+    while (_window->isOpen())
     {
 		Update();
 		Draw();
 
-		if(gameEnded)
-			window->close();
+		if(_gameEnded)
+			_window->close();
     }
 }
 
@@ -25,12 +25,12 @@ void Application::Update()
 	Input::Update();
 	
     sf::Event event;
-    while (window->pollEvent(event))
+    while(_window->pollEvent(event))
     {
 		switch(event.type)
 		{
 		case sf::Event::Closed:
-			gameEnded = true;
+			_gameEnded = true;
 			break;
 		case sf::Event::KeyPressed:
 			Input::KeyPressed(event.key.code);
@@ -41,17 +41,20 @@ void Application::Update()
 		}
     }
 
+	_level->Update();
 }
 
 void Application::Draw()
 {
-    window->clear(sf::Color(255, 255, 255, 255));
-	level->Draw(window);
-    window->display();
+    _window->clear(sf::Color(255, 255, 255, 255));
+	
+	_level->Draw(_window);
+    
+	_window->display();
 }
 
 Application::~Application(void)
 {
-	delete window;
-	delete level;
+	delete _window;
+	delete _level;
 }

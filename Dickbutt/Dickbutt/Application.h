@@ -13,14 +13,15 @@ public:
 	Application(void);
 	~Application(void);
 private:
-	sf::RenderWindow* window;
-
-	bool gameEnded;
-	LevelClass *level;
-
 	void Update();
 	void Draw();
 
-	GameObject* testObject;
+
+	sf::RenderWindow* _window;
+
+	bool _gameEnded;
+	LevelClass* _level;
+
+	GameObject* _testObject;
 };
 

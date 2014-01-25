@@ -1,6 +1,6 @@
 #include "SpriteLibrary.h"
 
-Sprite** SpriteLibrary::libraryFile = new Sprite*[2];
+Sprite** SpriteLibrary::_libraryFile = new Sprite*[TOTAL_SPRITES];
 
 
 
@@ -15,11 +15,13 @@ SpriteLibrary::~SpriteLibrary(void)
 
 void SpriteLibrary::Initialise(void)
 {
-	libraryFile[GROUND] = new Sprite("Assets/Images/dirtCenter.png");
-	libraryFile[AIR] = new Sprite("Assets/Images/bg.png");
+	_libraryFile[GROUND] = new Sprite("Assets/Images/dirtCenter.png");
+	_libraryFile[AIR] = new Sprite("Assets/Images/bg.png");
+	_libraryFile[SPIN_BLOCK] = new Sprite("Assets/Images/SpinCentre.png");
+	_libraryFile[SPIN_OBJECT] = new Sprite("Assets/Images/SpinEnd.png");
 }
 
-sf::Sprite SpriteLibrary::GetSprite(int SpriteID)
+sf::Sprite SpriteLibrary::GetSprite(int spriteID)
 {
-	return libraryFile[SpriteID]->GetSprite();
+	return _libraryFile[spriteID]->GetSprite();
 }
