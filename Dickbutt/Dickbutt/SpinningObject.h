@@ -18,6 +18,8 @@ public:
 
 
 private:
+	GameObject _gameObject;
+
 	float _angleStage;
 
 	int _distance;

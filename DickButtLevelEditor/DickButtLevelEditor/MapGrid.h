@@ -6,8 +6,8 @@
 #include <string>
 #include <fstream>
 
-#define MAP_SCREEN_WIDTH 400
-#define MAP_SCREEN_HEIGHT 400
+#define MAP_SCREEN_WIDTH 1200
+#define MAP_SCREEN_HEIGHT 550
 
 
 class MapGrid

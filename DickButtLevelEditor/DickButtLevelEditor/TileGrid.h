@@ -3,7 +3,8 @@
 #include "GlobalHeader.h"
 #include "SpriteLibrary.h"
 
-#define TILE_GRID_OFFSET sf::Vector2f(500.0f, 50.0f)
+#define TILE_GRID_OFFSET sf::Vector2f(400.0f, 570.0f)
+#define GRID_WIDTH 5
 
 
 class TileGrid

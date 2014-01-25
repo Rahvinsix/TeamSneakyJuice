@@ -3,7 +3,7 @@
 
 Application::Application(void)
 {
-	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Team Sneaky Juice Level Editor");
+	window = new sf::RenderWindow(sf::VideoMode(1200, 700), "Team Sneaky Juice Level Editor");
 
 	SpriteLibrary::Initialise();
 

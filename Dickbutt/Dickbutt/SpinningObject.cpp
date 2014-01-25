@@ -8,6 +8,8 @@ SpinningObject::SpinningObject(int xLoc, int yLoc)
 
 	_angleStage = 0;
 	_distance = 3;
+
+	_gameObject.SetSpriteID(SpriteLibrary::SPIN_OBJECT);
 }
 
 
@@ -23,15 +25,16 @@ void SpinningObject::SetDistance(int distance)
 void SpinningObject::Update(void)
 {
 	_angleStage += 0.01;
+
+	sf::FloatRect spriteSize = SpriteLibrary::GetSprite(_gameObject.GetSpriteID()).getLocalBounds();
+	
+	_gameObject.SetPosition(sf::Vector2f(_xLoc * spriteSize.width, _yLoc * spriteSize.height));
+	_gameObject.MoveBy(sf::Vector2f(cos(_angleStage) * spriteSize.width * _distance, sin(_angleStage) * spriteSize.height * _distance));
 }
 
 void SpinningObject::Draw(sf::RenderWindow* window)
 {
-	sf::Sprite sprite = SpriteLibrary::GetSprite(SpriteLibrary::SPIN_OBJECT);
-	sf::FloatRect spriteSize = sprite.getLocalBounds();
-	
-	sprite.setPosition(_xLoc * spriteSize.width, _yLoc * spriteSize.height);
-	sprite.move(cos(_angleStage) * spriteSize.width * _distance, sin(_angleStage) * spriteSize.height * _distance);
+	sf::FloatRect spriteSize = SpriteLibrary::GetSprite(_gameObject.GetSpriteID()).getLocalBounds();
 
 	for(int i = 0; i < _distance; i++)
 	{
@@ -44,5 +47,5 @@ void SpinningObject::Draw(sf::RenderWindow* window)
 		window->draw(chainSprite);
 	}
 
-	window->draw(sprite);
+	_gameObject.Draw(window);
 }
