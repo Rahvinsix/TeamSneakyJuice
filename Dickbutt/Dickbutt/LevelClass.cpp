@@ -32,8 +32,18 @@ LevelClass::LevelClass(std::string fileName)
 			_levelGrid[lineNum][int(i/2)].SetPosition(sf::Vector2f(lineNum*spriteSize.width, int(i/2)*spriteSize.height));
 			_levelGrid[lineNum][int(i/2)].SetSpriteID(num);
 
-			if(num == SpriteLibrary::HEART || num == SpriteLibrary::SPIKE_BALL || num == SpriteLibrary::HEART_AND_BALL || num == SpriteLibrary::DOUBLE_BALL)
-				_spinningObjects.push_back(SpinningObject(lineNum, int(i/2)));
+			if(num == SpriteLibrary::HEART || num == SpriteLibrary::SPIKE_BALL)
+				_spinningObjects.push_back(SpinningObject(lineNum, int(i/2), num, false));
+			if(num == SpriteLibrary::HEART_AND_BALL)
+			{
+				_spinningObjects.push_back(SpinningObject(lineNum, int(i/2), SpriteLibrary::HEART, false));
+				_spinningObjects.push_back(SpinningObject(lineNum, int(i/2), SpriteLibrary::SPIKE_BALL, true));
+			}
+			if(num == SpriteLibrary::DOUBLE_BALL)
+			{
+				_spinningObjects.push_back(SpinningObject(lineNum, int(i/2), SpriteLibrary::SPIKE_BALL, false));
+				_spinningObjects.push_back(SpinningObject(lineNum, int(i/2), SpriteLibrary::SPIKE_BALL, true));
+			}
 		}
 
 		lineNum++;
@@ -84,6 +94,11 @@ void LevelClass::Draw(sf::RenderWindow* window, sf::Vector2f playerCentre)
 GameObject* LevelClass::TileAt(int x, int y)
 {
 	return &_levelGrid[x][y];
+}
+
+void LevelClass::SetTileAt(int x, int y, int num)
+{
+	_levelGrid[x][y].SetSpriteID(num);
 }
 
 int LevelClass::Width()

@@ -1,15 +1,24 @@
 #include "SpinningObject.h"
 
 
-SpinningObject::SpinningObject(int xLoc, int yLoc)
+SpinningObject::SpinningObject(int xLoc, int yLoc, int type, bool halfWay)
 {
 	_xLoc = xLoc;
 	_yLoc = yLoc;
+	_type = type;
 
-	_angleStage = 0;
+	_angleStage = (halfWay ? 3.142 : 0);
 	_distance = 3;
-
-	_gameObject.SetSpriteID(SpriteLibrary::SPIKE_END);
+	
+	switch(type)
+	{
+	case SpriteLibrary::HEART:
+		_gameObject.SetSpriteID(SpriteLibrary::HEART_END);
+		break;
+	case SpriteLibrary::SPIKE_BALL:
+		_gameObject.SetSpriteID(SpriteLibrary::SPIKE_END);
+		break;
+	}
 }
 
 
@@ -46,6 +55,8 @@ void SpinningObject::Draw(sf::RenderWindow* window)
 
 		window->draw(chainSprite);
 	}
+
+	_gameObject.SetRotation((_angleStage*180/3.142)+90);
 
 	_gameObject.Draw(window);
 }

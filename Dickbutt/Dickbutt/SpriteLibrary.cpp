@@ -30,8 +30,8 @@ void SpriteLibrary::Initialise(void)
 	_libraryFile[LAVA_5] = new Sprite("Assets/Images/lava5.png");
 	_libraryFile[LAVA_6] = new Sprite("Assets/Images/lava6.png");
 	_libraryFile[PLAYER] = new Sprite("Assets/Images/player.png");
-	_libraryFile[HEART_AND_BALL] = new Sprite("Assets/Images/heart_and_ball.png");
-	_libraryFile[DOUBLE_BALL] = new Sprite("Assets/Images/spikeyball2.png");
+	_libraryFile[HEART_AND_BALL] = new Sprite("Assets/Images/rotatebase.png");
+	_libraryFile[DOUBLE_BALL] = new Sprite("Assets/Images/rotatebase.png");
 	_libraryFile[LADDER] = new Sprite("Assets/Images/ladder.png");
 	_libraryFile[HEART_END] = new Sprite("Assets/Images/heart.png");
 	_libraryFile[SPIKE_END] = new Sprite("Assets/Images/spikeyball.png");

@@ -4,6 +4,8 @@
 GameObject::GameObject(void)
 {
 	bool seen = false;
+
+	_rotation = 0.0f;
 }
 
 
@@ -26,11 +28,25 @@ GameObject* GameObject::SetPosition(sf::Vector2f pos)
 	return this;
 }
 
+GameObject* GameObject::SetRotation(float rot)
+{
+	_rotation = rot;
+	
+	return this;
+}
+
 void GameObject::Draw(sf::RenderWindow* window)
 {
 	sf::Sprite renderSprite = SpriteLibrary::GetSprite(seen ? SpriteLibrary::PLAYER : spriteID);
 
 	renderSprite.setPosition(_position);
+
+	if(_rotation != 0)
+	{
+		renderSprite.setOrigin(renderSprite.getLocalBounds().width / 2, renderSprite.getLocalBounds().height / 2);
+		renderSprite.setRotation(_rotation);
+		renderSprite.move(renderSprite.getLocalBounds().width / 2, renderSprite.getLocalBounds().height / 2);
+	}
 
 	window->draw(renderSprite);
 }

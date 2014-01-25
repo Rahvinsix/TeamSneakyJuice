@@ -18,6 +18,7 @@ public:
 	void Update();
 
 	GameObject* TileAt(int, int);
+	void SetTileAt(int, int, int);
 
 	int Width();
 	int Height();

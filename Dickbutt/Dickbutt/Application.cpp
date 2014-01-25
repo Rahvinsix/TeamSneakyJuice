@@ -26,6 +26,7 @@ Application::Application(void)
 			{
 				_player->SetSpriteID(_level->TileAt(i, j)->GetSpriteID());
 				_player->SetPosition(_level->TileAt(i, j)->GetPosition());
+				_level->SetTileAt(i, j, SpriteLibrary::AIR);
 			}
 		}
 	}

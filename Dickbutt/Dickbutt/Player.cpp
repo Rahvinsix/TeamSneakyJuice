@@ -86,7 +86,7 @@ void Player::DrawPlayer(sf::RenderWindow* window)
 {
 	sf::Sprite playerSprite;
 	playerSprite = SpriteLibrary::GetSprite(SpriteLibrary::PLAYER);
-	playerSprite.setPosition(GetPosition() + sf::Vector2f(0.0f,(playerSprite.getLocalBounds().height/2)));
+	playerSprite.setPosition(GetPosition() + sf::Vector2f(playerSprite.getLocalBounds().width/2,(playerSprite.getLocalBounds().height/2)));
 	playerSprite.setOrigin(GetCentre()-GetPosition());
 	if(!_playerFacing)
 	{

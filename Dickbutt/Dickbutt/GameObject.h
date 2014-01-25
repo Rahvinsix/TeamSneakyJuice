@@ -23,6 +23,7 @@ public:
 	GameObject* SetPosition(sf::Vector2f);
 	GameObject* SetSpriteID(int);
 	GameObject* SetVelocity(sf::Vector2f);
+	GameObject* SetRotation(float);
 	
 	GameObject* Accelerate(sf::Vector2f);
 	void Move(void);
@@ -44,5 +45,6 @@ private:
 	int spriteID;
 	sf::Vector2f _velocity;
 	sf::Vector2f _position;
+	float _rotation;
 };
 
