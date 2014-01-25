@@ -105,6 +105,18 @@ int GameObject::GetSpriteID(void)
 	return spriteID;
 }
 
+sf::Vector2f GameObject::GetPosition(void)
+{
+	return _position;
+}
+
+sf::Vector2f GameObject::GetCentre(void)
+{
+	sf::FloatRect spriteSize = SpriteLibrary::GetSprite(spriteID).getLocalBounds();
+
+	return _position + sf::Vector2f(spriteSize.width/2, spriteSize.height/2);
+}
+
 void GameObject::MoveBy(sf::Vector2f vector)
 {
 	_position.x += vector.x;

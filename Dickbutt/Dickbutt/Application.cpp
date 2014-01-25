@@ -13,6 +13,10 @@ Application::Application(void)
 	_level = new LevelClass("Assets/Levels/level01.txt");
 	_player = new Player();
 	_gameEnded = false;
+
+	_camera = new sf::View(sf::FloatRect(0, 0, 800, 600));
+	_window->setView(*_camera);
+
 	
     while (_window->isOpen())
     {
@@ -71,6 +75,9 @@ void Application::Update()
     }
 
 	_level->Update();
+
+	_camera->setCenter(_player->GetCentre());
+	_window->setView(*_camera);
 }
 
 void Application::Draw()
@@ -88,4 +95,5 @@ Application::~Application(void)
 	delete _window;
 	delete _level;
 	delete _player;
+	delete _camera;
 }
