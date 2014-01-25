@@ -17,7 +17,7 @@ public:
 
 	static int CheckCollideWithVelocity(GameObject*, GameObject*);
 	static bool CheckVCollideWithVelocity(GameObject*, GameObject*);
-	static bool CheckHCollideWithVelocity(GameObject*, GameObject*);
+	static bool CheckHCollideWithVelocity(GameObject*, GameObject*, bool=false);
 	static bool CheckCollide(GameObject*,GameObject*);
 
 	GameObject* SetPosition(sf::Vector2f);

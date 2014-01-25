@@ -95,11 +95,11 @@ bool GameObject::CheckVCollideWithVelocity(GameObject* object1, GameObject* obje
 	return CheckCollide(newObj1, object2);
 }
 
-bool GameObject::CheckHCollideWithVelocity(GameObject* object1, GameObject* object2)
+bool GameObject::CheckHCollideWithVelocity(GameObject* object1, GameObject* object2, bool onLadder)
 {
 	sf::Vector2f veloc = object1->GetVelocity();
 
-	GameObject* newObj1 = (new GameObject())->SetPosition(object1->_position + sf::Vector2f(veloc.x, 0));
+	GameObject* newObj1 = (new GameObject())->SetPosition(object1->_position + sf::Vector2f(veloc.x, (onLadder ? -2 : 0)));
 
 	return CheckCollide(newObj1, object2);
 }
