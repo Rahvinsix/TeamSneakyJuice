@@ -9,6 +9,7 @@ public:
 	~Player(void);
 	void Update(void);
 	bool _playerFacing;
+	void DrawPlayer(sf::RenderWindow* window);
 
 	void VerticalCollision();
 

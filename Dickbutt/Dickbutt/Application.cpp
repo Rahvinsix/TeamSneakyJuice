@@ -17,6 +17,18 @@ Application::Application(void)
 	_camera = new sf::View(sf::FloatRect(0, 0, 800, 600));
 	_window->setView(*_camera);
 
+	for(int i = 0; i < _level->Width();i++)
+	{
+		for(int j = 0;j < _level->Height(); j++)
+		{
+			if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::PLAYER)
+			{
+				_player->SetSpriteID(_level->TileAt(i, j)->GetSpriteID());
+				_player->SetPosition(_level->TileAt(i, j)->GetPosition());
+			}
+		}
+	}
+
 	
     while (_window->isOpen())
     {
@@ -188,7 +200,7 @@ void Application::Draw()
     _window->clear(sf::Color(255, 255, 255, 255));
 
 	_level->Draw(_window, _player->GetCentre());
-	_player->Draw(_window);
+	_player->DrawPlayer(_window);
 
     _window->display();
 }

@@ -3,8 +3,8 @@
 
 Player::Player(void)
 {
-	SetSpriteID(SpriteLibrary::PLAYER);
-	SetPosition(sf::Vector2f(60.f,60.0f));
+	
+	
 	gravity = 2.0f;
 	jumpFrames = 0;
 	onGround = false;
@@ -47,6 +47,13 @@ void Player::Update(void)
 		DeltaVy(-5.0f);
 	}
 
+	if(_playerFacing)
+	{
+	
+		
+	
+	}
+
 	DeltaVy(gravity);
 	
 	Move();
@@ -57,4 +64,18 @@ void Player::VerticalCollision()
 {
 	if(GetVelocity().y >= 0)
 		onGround = true;
+}
+
+void Player::DrawPlayer(sf::RenderWindow* window)
+{
+	sf::Sprite playerSprite;
+	playerSprite = SpriteLibrary::GetSprite(SpriteLibrary::PLAYER);
+	playerSprite.setPosition(GetPosition() + sf::Vector2f(0.0f,(playerSprite.getLocalBounds().height/2)));
+	playerSprite.setOrigin(GetCentre()-GetPosition());
+	if(!_playerFacing)
+	{
+		playerSprite.setScale(-1,1);
+	}
+	
+	window->draw(playerSprite);
 }
