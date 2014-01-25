@@ -1,5 +1,7 @@
 #include "Application.h"
 
+sf::Clock _worldTime;
+sf::Clock _updateTime;
 
 Application::Application(void)
 {
@@ -38,16 +40,14 @@ void Application::Update()
 		{
 			if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::GROUND)
 			{
-				int collisionType = GameObject::CheckCollideWithVelocity(_player, _level->TileAt(i, j));
-				switch(collisionType)
+				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)))
 				{
-				case GameObject::H_COLLISION:
 					_player->MoveBy(sf::Vector2f(-(_player->GetVelocity().x),0.0f));
-					printf("H_COLLIDE");
-					break;
-				case GameObject::V_COLLISION:
-					_player->SetVelocity(sf::Vector2f(_player->GetVelocity().x,0.0f));
-					break;
+				}
+				if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)))
+				{
+					_player->MoveBy(sf::Vector2f(0.0f,-(_player->GetVelocity().y)));
+					_player->VerticalCollision();
 				}
 			}
 		}
