@@ -34,3 +34,22 @@ void GameObject::Draw(sf::RenderWindow* window)
 
 	window->draw(renderSprite);
 }
+
+GameObject* GameObject::SetVelocity(sf::Vector2f velocity)
+{
+	_velocity = velocity;
+
+	return this;
+}
+
+GameObject* GameObject::Accelerate(sf::Vector2f acceleration)
+{
+	_velocity += acceleration;
+
+	return this;
+}
+
+void GameObject::Move(void)
+{
+	position += _velocity;
+}

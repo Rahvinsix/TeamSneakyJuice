@@ -15,6 +15,16 @@ Input::~Input(void)
 {
 }
 
+void Input::Initialise(void)
+{
+	for(int i = 0; i < sf::Keyboard::KeyCount;i++)
+	{
+		prevKeys[i] = 0;
+		keys[i] = 0;
+	}
+
+}
+
 void Input::Update(void)
 {
 	for(int i = 0; i < sf::Keyboard::KeyCount;i++)

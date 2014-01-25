@@ -6,7 +6,9 @@ Application::Application(void)
 	window = new sf::RenderWindow(sf::VideoMode(800, 600), "Team Sneaky Juice");
 
 	SpriteLibrary::Initialise();
+	Input::Initialise();
 	level = new LevelClass();
+	player = new Player();
 	gameEnded = false;
 	
     while (window->isOpen())
@@ -23,6 +25,7 @@ void Application::Update()
 {
 	//Update player input
 	Input::Update();
+	player->Update();
 	
     sf::Event event;
     while (window->pollEvent(event))
@@ -47,6 +50,7 @@ void Application::Draw()
 {
     window->clear(sf::Color(255, 255, 255, 255));
 	level->Draw(window);
+	player->Draw(window);
     window->display();
 }
 

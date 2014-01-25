@@ -6,7 +6,7 @@ public:
 	SpriteLibrary(void);
 	~SpriteLibrary(void);
 	static void Initialise(void);
-	enum{GROUND,AIR};
+	enum{GROUND,AIR,PLAYER};
 	static Sprite** libraryFile;
 	static sf::Sprite GetSprite(int);
 };

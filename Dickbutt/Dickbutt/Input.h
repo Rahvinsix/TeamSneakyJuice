@@ -15,6 +15,7 @@ public:
 	static bool IsUp(sf::Keyboard::Key);
 	static bool IsPressed(sf::Keyboard::Key);
 	static bool IsReleased(sf::Keyboard::Key);
+	static void Initialise(void);
 
 
 private:
