@@ -1,5 +1,7 @@
 #include "Application.h"
 
+sf::Clock _worldTime;
+sf::Clock _updateTime;
 
 Application::Application(void)
 {
