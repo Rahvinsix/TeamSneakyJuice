@@ -20,6 +20,8 @@ private:
 
 	sf::RenderWindow* _window;
 
+	float _timeSinceLastUpdate;
+
 	bool _gameEnded;
 	LevelClass* _level;
 	Player* _player;

@@ -24,6 +24,10 @@ Application::Application(void)
 
 void Application::Update()
 {
+	_timeSinceLastUpdate = _updateTime.getElapsedTime().asSeconds();
+	_updateTime.restart();
+
+
 	//Update player input
 	Input::Update();
 	_player->Update();
