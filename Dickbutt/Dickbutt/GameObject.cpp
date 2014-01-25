@@ -3,7 +3,7 @@
 
 GameObject::GameObject(void)
 {
-	
+	bool seen = false;
 }
 
 
@@ -28,7 +28,7 @@ GameObject* GameObject::SetPosition(sf::Vector2f pos)
 
 void GameObject::Draw(sf::RenderWindow* window)
 {
-	sf::Sprite renderSprite = SpriteLibrary::GetSprite(spriteID);
+	sf::Sprite renderSprite = SpriteLibrary::GetSprite(seen ? SpriteLibrary::PLAYER : spriteID);
 
 	renderSprite.setPosition(_position);
 
@@ -114,4 +114,11 @@ void GameObject::MoveBy(sf::Vector2f vector)
 void GameObject::DeltaVy(float vy)
 {
 	_velocity.y += vy;
+}
+
+sf::Vector2f GameObject::GetPosition(void)
+{
+
+	return _position;
+
 }

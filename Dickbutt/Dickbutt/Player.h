@@ -8,6 +8,7 @@ public:
 	Player(void);
 	~Player(void);
 	void Update(void);
+	bool _playerFacing;
 
 	void VerticalCollision();
 

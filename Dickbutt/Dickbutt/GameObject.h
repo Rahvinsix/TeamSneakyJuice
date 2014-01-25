@@ -12,6 +12,9 @@ public:
 
 	int GetSpriteID(void);
 	sf::Vector2f GetVelocity(void);
+	sf::Vector2f GetPosition(void);
+
+	bool seen;
 
 	static int CheckCollideWithVelocity(GameObject*, GameObject*);
 	static bool CheckVCollideWithVelocity(GameObject*, GameObject*);
