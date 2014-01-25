@@ -14,6 +14,8 @@ Player::~Player(void)
 
 void Player::Update(void)
 {
+	
+	SetVelocity(sf::Vector2f(0.0f,0.0f));
 	if(Input::IsDown(sf::Keyboard::D))
 	{
 		SetVelocity(sf::Vector2f(2.0f,0.0f));
@@ -23,7 +25,8 @@ void Player::Update(void)
 		SetVelocity(sf::Vector2f(-2.0f,0.0f));
 	}
 
-	this->Move();
-	SetVelocity(sf::Vector2f(0.0f,0.0f));
+
+	Move();
+	
 }
 

@@ -26,6 +26,27 @@ void Application::Update()
 	//Update player input
 	Input::Update();
 	player->Update();
+
+	for(int i = 0; i < 10;i++)
+	{
+		for(int j = 0;j < 10; j++)
+		{
+			if(level->levelGrid[i][j].GetSpriteID() == SpriteLibrary::GROUND)
+			{
+				int collisionType = GameObject::CheckCollideWithVelocity(player, &level->levelGrid[i][j]);
+				switch(collisionType)
+				{
+				case GameObject::H_COLLISION:
+					player->MoveBy(sf::Vector2f(-(player->GetVelocity().x),0.0f));
+					printf("H_COLLIDE");
+					break;
+				case GameObject::V_COLLISION:
+					player->SetVelocity(sf::Vector2f(player->GetVelocity().x,0.0f));
+					break;
+				}
+			}
+		}
+	}
 	
     sf::Event event;
     while (window->pollEvent(event))

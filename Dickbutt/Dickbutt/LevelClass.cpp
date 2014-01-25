@@ -36,3 +36,4 @@ void LevelClass::Draw(sf::RenderWindow* window)
 		}
 	}
 }
+
