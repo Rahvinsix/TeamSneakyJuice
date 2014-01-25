@@ -27,5 +27,6 @@ private:
 	
 	LevelClass* _level;
 	Player* _player;
+	sf::View* _camera;
 };
 
