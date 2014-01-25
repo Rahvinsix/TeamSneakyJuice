@@ -8,7 +8,7 @@ class SpinningObject :
 	public GameObject
 {
 public:
-	SpinningObject(int, int);
+	SpinningObject(int, int, int, bool);
 	~SpinningObject(void);
 
 	void SetDistance(int);
@@ -19,6 +19,8 @@ public:
 
 private:
 	GameObject _gameObject;
+
+	int _type;
 
 	float _angleStage;
 
