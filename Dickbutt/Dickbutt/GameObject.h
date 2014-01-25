@@ -14,6 +14,8 @@ public:
 	sf::Vector2f GetVelocity(void);
 
 	static int CheckCollideWithVelocity(GameObject*, GameObject*);
+	static bool CheckVCollideWithVelocity(GameObject*, GameObject*);
+	static bool CheckHCollideWithVelocity(GameObject*, GameObject*);
 	static bool CheckCollide(GameObject*,GameObject*);
 
 	GameObject* SetPosition(sf::Vector2f);
@@ -24,6 +26,7 @@ public:
 	void Move(void);
 	void MoveBy(sf::Vector2f);
 	void Draw(sf::RenderWindow*);
+	void DeltaVy(float vy);
 
 	enum
 	{
