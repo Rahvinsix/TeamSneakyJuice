@@ -19,10 +19,26 @@ public:
 	{
 		AIR,
 		GROUND,
-		SPIN_BLOCK,
-		SPIN_OBJECT,
-		SPIN_CHAIN,
-		PLAYER
+		HEART,
+		SPIKE_BALL,
+		H_SPIKES,
+		V_SPIKES,
+		DOOR,
+		HIT_FROM_ABOVE_GUY,
+		HIT_FROM_SIDE_GUY,
+		LAVA_1,
+		LAVA_2,
+		LAVA_3,
+		LAVA_4,
+		LAVA_5,
+		LAVA_6,
+		PLAYER,
+		HEART_AND_BALL,
+		DOUBLE_BALL,
+		LADDER,
+		HEART_END,
+		SPIKE_END,
+		SPIN_CHAIN
 	};
 
 	static Sprite** _libraryFile;

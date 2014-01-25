@@ -36,13 +36,13 @@ public:
 		H_COLLISION,
 		NO_COLLISION
 	};
+	
+	bool seen;
 
 private:
 	
 	int spriteID;
 	sf::Vector2f _velocity;
 	sf::Vector2f _position;
-	
-	bool seen;
 };
 

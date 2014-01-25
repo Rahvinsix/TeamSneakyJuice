@@ -9,7 +9,7 @@ SpinningObject::SpinningObject(int xLoc, int yLoc)
 	_angleStage = 0;
 	_distance = 3;
 
-	_gameObject.SetSpriteID(SpriteLibrary::SPIN_OBJECT);
+	_gameObject.SetSpriteID(SpriteLibrary::SPIKE_END);
 }
 
 

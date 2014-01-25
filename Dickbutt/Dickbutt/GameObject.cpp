@@ -127,10 +127,3 @@ void GameObject::DeltaVy(float vy)
 {
 	_velocity.y += vy;
 }
-
-sf::Vector2f GameObject::GetPosition(void)
-{
-
-	return _position;
-
-}

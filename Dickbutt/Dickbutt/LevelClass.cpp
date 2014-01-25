@@ -16,7 +16,7 @@ LevelClass::LevelClass(std::string fileName)
 	}
 
 	_width = lines.size()-1;
-	_height = lines.at(0).length();
+	_height = lines.at(0).length()/2;
 
 	_levelGrid = new GameObject*[_width];
 	int lineNum = 0;
@@ -25,13 +25,15 @@ LevelClass::LevelClass(std::string fileName)
 	{
 		_levelGrid[lineNum] = new GameObject[mapLine->length()];
 
-		for(int i = 0; i < mapLine->length(); i++)
+		for(int i = 0; i < mapLine->length(); i+=2)
 		{
-			_levelGrid[lineNum][i].SetPosition(sf::Vector2f(lineNum*spriteSize.width, i*spriteSize.height));
-			_levelGrid[lineNum][i].SetSpriteID(mapLine->at(i)-48);
+			int num = (mapLine->at(i)-48) * 10 + mapLine->at(i+1)-48;
 
-			if(mapLine->at(i)-48 == SpriteLibrary::SPIN_BLOCK)
-				_spinningObjects.push_back(SpinningObject(lineNum, i));
+			_levelGrid[lineNum][int(i/2)].SetPosition(sf::Vector2f(lineNum*spriteSize.width, int(i/2)*spriteSize.height));
+			_levelGrid[lineNum][int(i/2)].SetSpriteID(num);
+
+			if(num == SpriteLibrary::HEART || num == SpriteLibrary::SPIKE_BALL || num == SpriteLibrary::HEART_AND_BALL || num == SpriteLibrary::DOUBLE_BALL)
+				_spinningObjects.push_back(SpinningObject(lineNum, int(i/2)));
 		}
 
 		lineNum++;
