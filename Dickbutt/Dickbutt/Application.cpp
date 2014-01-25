@@ -13,6 +13,7 @@ Application::Application(void)
 	_level = new LevelClass("Assets/Levels/level01.txt");
 	_player = new Player();
 	_gameEnded = false;
+	
 
 	_camera = new sf::View(sf::FloatRect(0, 0, 800, 600));
 	_window->setView(*_camera);
@@ -121,6 +122,18 @@ void Application::Update()
 		
 					printf("DOOR COLLIDE\N");
 
+				}
+			}
+			else if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::LADDER)
+			{
+			
+				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
+				{
+					_player->_onLadder = true;
+				}
+				else
+				{
+					_player->_onLadder = false;				
 				}
 			}
 		}

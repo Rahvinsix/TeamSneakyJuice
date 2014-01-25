@@ -20,15 +20,15 @@ private:
 
 
 	sf::RenderWindow* _window;
-	sf::Font* _font;
 
 	float _timeSinceLastUpdate;
 
 	bool _gameEnded;
-
 	
+
 	LevelClass* _level;
 	Player* _player;
 	sf::View* _camera;
+	sf::Font* _font;
 };
 

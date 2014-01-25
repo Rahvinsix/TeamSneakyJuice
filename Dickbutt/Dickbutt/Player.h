@@ -10,7 +10,7 @@ public:
 	void Update(void);
 	bool _playerFacing;
 	void DrawPlayer(sf::RenderWindow* window);
-
+	bool _onLadder;
 	void VerticalCollision();
 
 private:
