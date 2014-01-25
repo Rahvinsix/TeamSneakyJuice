@@ -17,10 +17,13 @@ public:
 	GameObject* SetVelocity(sf::Vector2f);
 	GameObject* Accelerate(sf::Vector2f);
 	static int CheckCollideWithVelocity(GameObject*, GameObject*);
+	static bool CheckVCollideWithVelocity(GameObject*, GameObject*);
+	static bool CheckHCollideWithVelocity(GameObject*, GameObject*);
 	static bool CheckCollide(GameObject*,GameObject*);
 	void Move(void);
 	void MoveBy(sf::Vector2f);
 	void Draw(sf::RenderWindow*);
+	void DeltaVy(float vy);
 
 	enum
 	{

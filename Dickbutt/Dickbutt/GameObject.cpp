@@ -61,19 +61,31 @@ void GameObject::Move(void)
 
 int GameObject::CheckCollideWithVelocity(GameObject* object1, GameObject* object2)
 {
-	sf::Vector2f veloc = object1->GetVelocity();
-	
-	GameObject* newObj1 = (new GameObject())->SetPosition(object1->_position + sf::Vector2f(veloc.x, 0));
-
-	if(CheckCollide(newObj1, object2))
+	if(CheckHCollideWithVelocity(object1, object2))
 		return H_COLLISION;
 
-	newObj1 = (new GameObject())->SetPosition(object1->_position + sf::Vector2f(0, veloc.y));
-
-	if(CheckCollide(newObj1, object2))
+	if(CheckVCollideWithVelocity(object1, object2))
 		return V_COLLISION;
 
 	return NO_COLLISION;
+}
+
+bool GameObject::CheckVCollideWithVelocity(GameObject* object1, GameObject* object2)
+{
+	sf::Vector2f veloc = object1->GetVelocity();
+
+	GameObject* newObj1 = (new GameObject())->SetPosition(object1->_position + sf::Vector2f(0, veloc.y));
+
+	return CheckCollide(newObj1, object2);
+}
+
+bool GameObject::CheckHCollideWithVelocity(GameObject* object1, GameObject* object2)
+{
+	sf::Vector2f veloc = object1->GetVelocity();
+
+	GameObject* newObj1 = (new GameObject())->SetPosition(object1->_position + sf::Vector2f(veloc.x, 0));
+
+	return CheckCollide(newObj1, object2);
 }
 
 bool GameObject::CheckCollide(GameObject* object1, GameObject* object2)
@@ -97,4 +109,9 @@ void GameObject::MoveBy(sf::Vector2f vector)
 {
 	_position.x += vector.x;
 	_position.y += vector.y;
+}
+
+void GameObject::DeltaVy(float vy)
+{
+	_velocity.y += vy;
 }

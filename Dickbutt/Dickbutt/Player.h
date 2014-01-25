@@ -8,7 +8,14 @@ public:
 	Player(void);
 	~Player(void);
 	void Update(void);
+
+	void VerticalCollision();
+
 private:
+	float gravity;
+	int jumpFrames;
+
+	bool onGround;
 	
 };
 
