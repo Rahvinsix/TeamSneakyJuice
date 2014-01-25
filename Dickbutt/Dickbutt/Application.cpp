@@ -6,7 +6,7 @@ Application::Application(void)
 	_window = new sf::RenderWindow(sf::VideoMode(800, 600), "Team Sneaky Juice");
 
 	SpriteLibrary::Initialise();
-	_level = new LevelClass();
+	_level = new LevelClass("Assets/Levels/level01.txt");
 	_gameEnded = false;
 	
     while (_window->isOpen())

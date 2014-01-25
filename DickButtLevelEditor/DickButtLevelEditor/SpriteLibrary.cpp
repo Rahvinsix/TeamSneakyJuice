@@ -14,8 +14,9 @@ SpriteLibrary::~SpriteLibrary(void)
 
 void SpriteLibrary::Initialise()
 {
-	sprites[0] = new Sprite("Assets/Images/dirtCenter.png");
-	sprites[1] = new Sprite("Assets/Images/dirtCenter_2.png");
+	sprites[0] = new Sprite("Assets/Images/bg.png");
+	sprites[1] = new Sprite("Assets/Images/dirtCenter.png");
+	sprites[2] = new Sprite("Assets/Images/SpinCentre.png");
 }
 
 sf::Sprite SpriteLibrary::GetSprite(int spriteId)
