@@ -10,27 +10,14 @@ Application::Application(void)
 	SpriteLibrary::Initialise();
 
 	Input::Initialise();
-	_level = new LevelClass("Assets/Levels/level01.txt");
-	_player = new Player();
 	_gameEnded = false;
 	
 
 	_camera = new sf::View(sf::FloatRect(0, 0, 800, 600));
 	_window->setView(*_camera);
 
-	for(int i = 0; i < _level->Width();i++)
-	{
-		for(int j = 0;j < _level->Height(); j++)
-		{
-			if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::PLAYER)
-			{
-				_player->SetSpriteID(_level->TileAt(i, j)->GetSpriteID());
-				_player->SetPosition(_level->TileAt(i, j)->GetPosition());
-				_player->setSpawn(_level->TileAt(i, j)->GetPosition());
-				_level->SetTileAt(i, j, SpriteLibrary::AIR);
-			}
-		}
-	}
+	_currentLevel = 1;
+	StartLevel();
 
 	_font = new sf::Font();
 	_font->loadFromFile("Assets/Fonts/arial.ttf");
@@ -105,8 +92,9 @@ void Application::Update()
 	{
 		for(int j = MAX(playerTilePos.y - 2, 0);j < MIN(_level->Height(), playerTilePos.y + 2); j++)
 		{
-			if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::GROUND)
+			switch(_level->TileAt(i, j)->GetSpriteID())
 			{
+			case SpriteLibrary::GROUND:
 				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)))
 				{
 					_player->MoveBy(sf::Vector2f(-(_player->GetVelocity().x),0.0f));
@@ -116,19 +104,36 @@ void Application::Update()
 					_player->MoveBy(sf::Vector2f(0.0f,-(_player->GetVelocity().y)));
 					_player->VerticalCollision();
 				}
-			}
-			else if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::DOOR)
-			{
+				break;
+			case SpriteLibrary::DOOR:
 				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
 				{
-		
-					printf("DOOR COLLIDE\n");
-
+					if(_level->LevelComplete())
+					{
+						_currentLevel++;
+						if(_currentLevel <= TOTAL_LEVELS)
+							StartLevel();
+						else
+							EndGame();
+					}
 				}
-			}
-			else if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::LADDER)
-			{
-			
+				break;
+			case SpriteLibrary::LAVA_1:
+			case SpriteLibrary::LAVA_2:
+			case SpriteLibrary::LAVA_3:
+			case SpriteLibrary::LAVA_4:
+			case SpriteLibrary::LAVA_5:
+			case SpriteLibrary::LAVA_6:
+			case SpriteLibrary::H_SPIKES:
+			case SpriteLibrary::V_SPIKES:
+			case SpriteLibrary::H_SPIKES_FLIPPED:
+				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
+				{
+					_player->Death();
+					printf("DEAD");
+				}
+				break;
+			case SpriteLibrary::LADDER:
 				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
 				{
 					_player->_onLadder = true;
@@ -137,15 +142,7 @@ void Application::Update()
 				{
 					_player->_onLadder = false;				
 				}
-			}
-			else if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::LAVA_1)
-			{
-			
-				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
-				{
-					_player->Death();
-					printf("DEAD");
-				}
+				break;
 			}
 		}
 	}
@@ -204,6 +201,38 @@ void Application::Draw()
 	_window->draw(fps);
 	
     _window->display();
+}
+
+void Application::StartLevel()
+{
+	std::stringstream lvlName;
+	lvlName << "Assets/Levels/level";
+	if(_currentLevel < 10)
+		lvlName << "0";
+	lvlName << _currentLevel;
+	lvlName << ".txt";
+
+	_level = new LevelClass(lvlName.str());
+	_player = new Player();
+
+	for(int i = 0; i < _level->Width();i++)
+	{
+		for(int j = 0;j < _level->Height(); j++)
+		{
+			if(_level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::PLAYER)
+			{
+				_player->SetSpriteID(_level->TileAt(i, j)->GetSpriteID());
+				_player->SetPosition(_level->TileAt(i, j)->GetPosition());
+				_player->setSpawn(_level->TileAt(i, j)->GetPosition());
+				_level->SetTileAt(i, j, SpriteLibrary::AIR);
+			}
+		}
+	}
+}
+
+void Application::EndGame()
+{
+	printf("Game over, chump");
 }
 
 Application::~Application(void)

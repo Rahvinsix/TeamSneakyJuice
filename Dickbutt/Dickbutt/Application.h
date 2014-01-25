@@ -8,6 +8,8 @@
 #include "Player.h"
 #include <sstream>
 
+#define TOTAL_LEVELS 2
+
 
 class Application
 {
@@ -18,12 +20,18 @@ private:
 	void Update();
 	void Draw();
 
+	void StartLevel();
+	void EndGame();
+
 
 	sf::RenderWindow* _window;
 
 	float _timeSinceLastUpdate;
 
 	bool _gameEnded;
+
+	int _currentLevel;
+	std::string* _levelNames;
 	
 
 	LevelClass* _level;
