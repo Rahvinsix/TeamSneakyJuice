@@ -12,7 +12,7 @@ public:
 	~SpinningObject(void);
 
 	void SetDistance(int);
-
+	GameObject* GetGameObject(void);
 	void Update(void);
 	void Draw(sf::RenderWindow*);
 

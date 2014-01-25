@@ -52,6 +52,18 @@ void Application::Update()
 			}
 		}
 	}
+
+	for(std::vector<SpinningObject>::iterator i = _level->_spinningObjects.begin();i!= _level->_spinningObjects.end();i++)
+	{
+	
+		if(GameObject::CheckCollide(_player, i->GetGameObject()))
+		{
+		
+			printf("Collide with spinner");
+
+		}
+	
+	}
 	
     sf::Event event;
     while(_window->pollEvent(event))
