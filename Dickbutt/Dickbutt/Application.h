@@ -44,6 +44,7 @@ private:
 	std::string* _levelNames;
 	
 	sf::Sprite* splash;
+	sf::Sprite* end;
 
 	LevelClass* _level;
 	Player* _player;
