@@ -45,8 +45,6 @@ Application::Application(void)
 	splash->setTexture(SpriteLibrary::GetTexture(SpriteLibrary::SPLASH));
 	SplashScreen();
 	printf("End drawing splash\n");
-	
-	_updateTime.restart();
 
 	
    while (_window->isOpen())
@@ -56,7 +54,11 @@ Application::Application(void)
 		{
 			case SPLASH:
 				if(Input::IsDown(sf::Keyboard::Space))
+				{
 					gameState = PLAYING;
+					
+					_updateTime.restart();
+				}
 				break;
 			case PLAYING:
 				Update();

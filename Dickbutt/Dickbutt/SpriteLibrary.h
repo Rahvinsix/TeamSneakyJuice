@@ -56,7 +56,7 @@ public:
 		HEART6,
 		DOOR_OPEN,
 		PLAYER_1,
-		LEVEL_TIMER_BG
+		LEVEL_TIMER_BG,
 		SPLASH
 	};
 

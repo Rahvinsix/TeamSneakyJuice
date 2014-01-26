@@ -22,6 +22,8 @@ LevelClass::LevelClass(std::string fileName)
 
 	inputFile.close();
 
+	printf("File closed %s\n", fileName);
+
 	_width = lines.size()-1;
 	_height = lines.at(0).length()/2;
 
@@ -55,6 +57,8 @@ LevelClass::LevelClass(std::string fileName)
 
 		lineNum++;
 	}
+
+	printf("Level loaded\n");
 
 	_timeRemaining = 120.0f;
 }
