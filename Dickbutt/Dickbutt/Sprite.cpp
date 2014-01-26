@@ -16,7 +16,10 @@ Sprite::Sprite(char* fileName)
 		texLoaded = false;
 	}
 	else
+	{
+		printf("Finished loading: %s\n", fileName);
 		texLoaded = true;
+	}
 }
 
 

@@ -59,6 +59,7 @@ bool Input::IsPressed(sf::Keyboard::Key key)
 	{
 		return true;
 	}
+	return false;
 }
 
 bool Input::IsReleased(sf::Keyboard::Key key)
@@ -67,4 +68,5 @@ bool Input::IsReleased(sf::Keyboard::Key key)
 	{
 		return true;
 	}
+	return false;
 }
