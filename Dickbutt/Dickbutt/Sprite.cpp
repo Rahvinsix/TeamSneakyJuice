@@ -12,12 +12,12 @@ Sprite::Sprite(char* fileName)
 
 	if(!tex->loadFromFile(fileName))
 	{
-		printf("Sneaky juice interfering with file: %S", fileName);
+		printf("Sneaky juice interfering with file: %s\n", fileName);
 		texLoaded = false;
 	}
 	else
 	{
-		printf("Finished loading: %s\n", fileName);
+		printf("Loaded file: %s\n", fileName);
 		texLoaded = true;
 	}
 }

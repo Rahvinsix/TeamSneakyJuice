@@ -67,7 +67,7 @@ void GameObject::Draw(sf::RenderWindow* window)
 			if(_playerSight - _position.x > 0 && _playerSight - _position.x < mySprite.getLocalBounds().width)
 			{
 				sf::FloatRect spriteBounds = mySprite.getLocalBounds();
-				sf::IntRect newSprite(spriteBounds.left + (_playerSight - _position.x), spriteBounds.top, spriteBounds.width - (_playerSight - _position.x), spriteBounds.height);
+				sf::IntRect newSprite(spriteBounds.left + floor(_playerSight - _position.x), spriteBounds.top, spriteBounds.width - floor(_playerSight - _position.x), spriteBounds.height);
 				mySprite.setTextureRect(newSprite);
 				mySprite.move(sf::Vector2f((_playerSight - _position.x), 0));
 			}

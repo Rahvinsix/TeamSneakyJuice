@@ -57,7 +57,8 @@ public:
 		DOOR_OPEN,
 		PLAYER_1,
 		SPLASH,
-		DICKBUTT
+		DICKBUTT,
+		LEVEL_TIMER_BG
 	};
 
 	static Sprite* _libraryFile[TOTAL_SPRITES];

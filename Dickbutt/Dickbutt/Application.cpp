@@ -22,8 +22,9 @@ Application::Application(void)
 	_currentLevel = 1;
 	StartLevel();
 
-	_font = new sf::Font();
-	_font->loadFromFile("Assets/Fonts/arial.ttf");
+	_font.loadFromFile("Assets/Fonts/arial.ttf");
+
+	_window->setFramerateLimit(60);
 
 	
 	sf::Music music;
@@ -44,18 +45,20 @@ Application::Application(void)
 	splash->setTexture(SpriteLibrary::GetTexture(SpriteLibrary::SPLASH));
 	SplashScreen();
 	printf("End drawing splash\n");
-	
-	_updateTime.restart();
 
 	
-    while (_window->isOpen())
+   while (_window->isOpen())
     {
 		Input::Update();
 		switch(gameState)
 		{
 			case SPLASH:
 				if(Input::IsDown(sf::Keyboard::Space))
+				{
 					gameState = PLAYING;
+					
+					_updateTime.restart();
+				}
 				break;
 			case PLAYING:
 				Update();
@@ -90,9 +93,15 @@ Application::Application(void)
 
 void Application::Update()
 {
-
 	_timeSinceLastUpdate = _updateTime.getElapsedTime().asSeconds();
 	_updateTime.restart();
+
+	for(int i = 0; i < _level->Width();i++)
+		for(int j = 0;j < _level->Height(); j++)
+			if((_level->TileAt(i, j)->GetSpriteID() != SpriteLibrary::AIR))
+				_level->TileAt(i, j)->PlayerSight(_player->GetCentre().x, _player->_playerFacing);
+	for(std::vector<SpinningObject>::iterator i = _level->_spinningObjects.begin();i!= _level->_spinningObjects.end();i++)
+		i->GetGameObject()->PlayerSight(_player->GetCentre().x, _player->_playerFacing);
 
 	if(_died || _goToNextLevel)
 	{
@@ -119,13 +128,6 @@ void Application::Update()
 
 		return;
 	}
-
-	for(int i = 0; i < _level->Width();i++)
-		for(int j = 0;j < _level->Height(); j++)
-			if((_level->TileAt(i, j)->GetSpriteID() != SpriteLibrary::AIR))
-				_level->TileAt(i, j)->PlayerSight(_player->GetCentre().x, _player->_playerFacing);
-	for(std::vector<SpinningObject>::iterator i = _level->_spinningObjects.begin();i!= _level->_spinningObjects.end();i++)
-		i->GetGameObject()->PlayerSight(_player->GetCentre().x, _player->_playerFacing);
 	
 	switch(_player->checkHearts())
 	{
@@ -255,13 +257,13 @@ void Application::Update()
 	{
 		if((GameObject::CheckCollide(_player, i->GetGameObject())))
 		{
-			if((i->GetGameObject()->GetSpriteID() == SpriteLibrary::HEART_END))
+			if(i->GetGameObject()->GetSpriteID() == SpriteLibrary::HEART_END)
 			{
 				i->GetGameObject()->SetSpriteID(SpriteLibrary::AIR);
 				_player->addHeart();
 				printf("Hearts: %d\n",_player->checkHearts());
 			}
-			else
+			if(i->GetGameObject()->GetSpriteID() == SpriteLibrary::SPIKE_END)
 			{
 				_died = true;
 				_timeToWait = 1;
@@ -270,6 +272,11 @@ void Application::Update()
 	}
 
 	_level->Update(_timeSinceLastUpdate);
+	if(_level->TimeUp())
+	{
+		_died = true;
+		_timeToWait = 1.0f;
+	}
 
 	_camera->setCenter(_player->GetCentre());
 	_window->setView(*_camera);
@@ -287,9 +294,28 @@ void Application::Draw()
 	ss << "FPS: ";
 	ss << int(1 / _timeSinceLastUpdate);
 	fps.setString(ss.str());
-	fps.setFont(*_font);
+	fps.setFont(_font);
 	fps.setPosition(_player->GetCentre() + sf::Vector2f(-380, -280));
+	fps.setColor(sf::Color::Black);
 	_window->draw(fps);
+
+	sf::Text levelTime;
+	std::stringstream lvlSS;
+	lvlSS << int(_level->TimeRemaining());
+	lvlSS << "s";
+	levelTime.setString(lvlSS.str());
+	levelTime.setFont(_font);
+	levelTime.setOrigin(levelTime.getLocalBounds().width / 2, levelTime.getLocalBounds().height / 2);
+	levelTime.setPosition(_player->GetCentre() + sf::Vector2f(0, -260));// + sf::Vector2f(-levelTime.getLocalBounds().width/2, -260-levelTime.getLocalBounds().height/2));
+	levelTime.setColor(_level->TimeRemaining() >= 10 ? sf::Color::Black : sf::Color::Red);
+
+	sf::Sprite levelTimeBG = SpriteLibrary::GetSprite(SpriteLibrary::LEVEL_TIMER_BG);
+	levelTimeBG.setOrigin(levelTimeBG.getLocalBounds().width/2, levelTimeBG.getLocalBounds().height/2);
+	levelTimeBG.setPosition(_player->GetCentre() + sf::Vector2f(0, -252));
+	levelTimeBG.setPosition(int(levelTimeBG.getPosition().x), int(levelTimeBG.getPosition().y));
+
+	_window->draw(levelTimeBG);
+	_window->draw(levelTime);
 
     _window->display();
 }
@@ -343,9 +369,9 @@ void Application::EndGame()
 
 Application::~Application(void)
 {
-	delete _window;
+	/*delete _window;
 	delete _level;
 	delete _player;
 	delete _camera;
-	delete _font;
+	delete _font;*/
 }

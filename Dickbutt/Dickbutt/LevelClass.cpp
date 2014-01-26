@@ -8,12 +8,21 @@ LevelClass::LevelClass(std::string fileName)
 	std::ifstream inputFile(fileName);
 	std::vector<std::string> lines;
 
+	if(!inputFile)
+		printf("File missing: %s\n", fileName);
+	else
+		printf("File loaded: %s\n", fileName);
+
 	while(!inputFile.eof())
 	{
 		std::string line;
 		std::getline(inputFile, line);
 		lines.push_back(line);
 	}
+
+	inputFile.close();
+
+	printf("File closed %s\n", fileName);
 
 	_width = lines.size()-1;
 	_height = lines.at(0).length()/2;
@@ -49,7 +58,9 @@ LevelClass::LevelClass(std::string fileName)
 		lineNum++;
 	}
 
-	inputFile.close();
+	printf("Level loaded\n");
+
+	_timeRemaining = 120.0f;
 }
 
 
@@ -61,6 +72,18 @@ void LevelClass::Update(float timeSinceLastUpdate)
 {
 	for(std::vector<SpinningObject>::iterator spinObj = _spinningObjects.begin(); spinObj != _spinningObjects.end(); spinObj++)
 		spinObj->Update(timeSinceLastUpdate);
+
+	_timeRemaining -= timeSinceLastUpdate;
+}
+
+bool LevelClass::TimeUp()
+{
+	return _timeRemaining <= 0;
+}
+
+int LevelClass::TimeRemaining()
+{
+	return int(_timeRemaining);
 }
 
 void LevelClass::Draw(sf::RenderWindow* window, sf::Vector2f playerCentre)
