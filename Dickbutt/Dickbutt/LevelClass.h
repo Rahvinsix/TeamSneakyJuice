@@ -26,6 +26,9 @@ public:
 	int Height();
 	std::vector<SpinningObject> _spinningObjects;
 
+	bool TimeUp(void);
+	int TimeRemaining(void);
+
 
 
 private:
@@ -33,5 +36,7 @@ private:
 	
 	int _width;
 	int _height;
+
+	float _timeRemaining;
 };
 

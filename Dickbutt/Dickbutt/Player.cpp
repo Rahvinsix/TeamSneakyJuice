@@ -25,7 +25,6 @@ Player::~Player(void)
 
 void Player::Update(float timeElapsed)
 {
-	
 	SetVelocity(sf::Vector2f(0.0f,0.0f));
 
 	if(Input::IsDown(sf::Keyboard::D))
@@ -74,6 +73,7 @@ void Player::Update(float timeElapsed)
 	Move(timeElapsed);
 	
 	_onLadder = false;
+	onGround = false;
 
 	bool oldMoving = _moving;
 	_moving = GetVelocity().x != 0;

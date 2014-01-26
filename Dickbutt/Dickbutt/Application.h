@@ -44,6 +44,6 @@ private:
 	LevelClass* _level;
 	Player* _player;
 	sf::View* _camera;
-	sf::Font* _font;
+	sf::Font _font;
 };
 

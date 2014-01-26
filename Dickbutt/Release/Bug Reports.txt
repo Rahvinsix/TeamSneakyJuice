@@ -1,0 +1,7 @@
+Objects (hearts& bad guys aren't returning after respawn
+
+spikeyballs don't kill you
+
+Vertical spikes disappear when you walk into them from the side
+
+horrizontal spikes disappear when you fall on them from above
