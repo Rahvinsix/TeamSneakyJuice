@@ -63,8 +63,16 @@ Application::Application(void)
 			case PLAYING:
 				Update();
 				Draw();
+				if(_currentLevel>TOTAL_LEVELS)
+				{
+				
+					gameState = END;
+				
+				}
 				break;
 			case END:
+				splash = new sf::Sprite();
+				splash->setTexture(SpriteLibrary::GetTexture(SpriteLibrary::SPLASH));
 				EndGame();
 				break;
 		}
@@ -364,7 +372,10 @@ void Application::StartLevel()
 
 void Application::EndGame()
 {
-	printf("Game over, chump");
+	_window->clear(sf::Color(255, 0, 255, 255));
+	sf::Sprite mySplash = SpriteLibrary::GetSprite(SpriteLibrary::DICKBUTT);
+	_window->draw(mySplash);
+	_window->display();
 }
 
 Application::~Application(void)

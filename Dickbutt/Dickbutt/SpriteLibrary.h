@@ -56,8 +56,9 @@ public:
 		HEART6,
 		DOOR_OPEN,
 		PLAYER_1,
-		LEVEL_TIMER_BG,
-		SPLASH
+		SPLASH,
+		DICKBUTT,
+		LEVEL_TIMER_BG
 	};
 
 	static Sprite* _libraryFile[TOTAL_SPRITES];
