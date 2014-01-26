@@ -16,8 +16,6 @@ public:
 	static sf::Sprite GetSprite(int);
 	static sf::Texture GetTexture(int);
 
-	static bool IsGround(int spriteId);
-
 	
 	enum
 	{

@@ -15,7 +15,7 @@ public:
 	void LoadFromFile(char* fileName);
 
 	void Draw(sf::RenderWindow* window, sf::Vector2f playerCentre);
-	void Update();
+	void Update(float);
 
 	GameObject* TileAt(int, int);
 	void SetTileAt(int, int, int);

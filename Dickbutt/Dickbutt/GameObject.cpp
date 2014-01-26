@@ -104,9 +104,9 @@ GameObject* GameObject::Accelerate(sf::Vector2f acceleration)
 	return this;
 }
 
-void GameObject::Move(void)
+void GameObject::Move(float timeElapsed)
 {
-	_position += _velocity;
+	_position += sf::Vector2f(timeElapsed * _velocity.x * 60, timeElapsed * _velocity.y * 60);
 }
 
 int GameObject::CheckCollideWithVelocity(GameObject* object1, GameObject* object2)

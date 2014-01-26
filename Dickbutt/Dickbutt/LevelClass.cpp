@@ -57,10 +57,10 @@ LevelClass::~LevelClass(void)
 {
 }
 
-void LevelClass::Update()
+void LevelClass::Update(float timeSinceLastUpdate)
 {
 	for(std::vector<SpinningObject>::iterator spinObj = _spinningObjects.begin(); spinObj != _spinningObjects.end(); spinObj++)
-		spinObj->Update();
+		spinObj->Update(timeSinceLastUpdate);
 }
 
 void LevelClass::Draw(sf::RenderWindow* window, sf::Vector2f playerCentre)

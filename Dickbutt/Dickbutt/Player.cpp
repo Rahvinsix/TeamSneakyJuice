@@ -19,7 +19,7 @@ Player::~Player(void)
 {
 }
 
-void Player::Update(void)
+void Player::Update(float timeElapsed)
 {
 	
 	SetVelocity(sf::Vector2f(0.0f,0.0f));
@@ -67,7 +67,7 @@ void Player::Update(void)
 			
 		}
 	}
-	Move();
+	Move(timeElapsed);
 	
 	_onLadder = false;
 }

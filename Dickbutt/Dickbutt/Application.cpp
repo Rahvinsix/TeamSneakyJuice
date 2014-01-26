@@ -32,6 +32,7 @@ Application::Application(void)
 	music.play();
 	music.setLoop(true);
 	
+	_updateTime.restart();
 
 	
     while (_window->isOpen())
@@ -84,7 +85,7 @@ void Application::Update()
 
 	//Update player input
 	Input::Update();
-	_player->Update();
+	_player->Update(_timeSinceLastUpdate);
 
 	sf::FloatRect spriteSize = SpriteLibrary::GetSprite(0).getLocalBounds();
 	sf::Vector2i playerTilePos(int(_player->GetCentre().x / spriteSize.width), int(_player->GetCentre().y / spriteSize.height));
@@ -120,14 +121,14 @@ void Application::Update()
 			case SpriteLibrary::FLOOR_LC:
 			case SpriteLibrary::FLOOR_RB:
 			case SpriteLibrary::FLOOR_RC:
-				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j), _player->_onLadder))
-				{
-					_player->MoveBy(sf::Vector2f(-(_player->GetVelocity().x),(_player->_onLadder ? -2.0f : 0.0f)));
-				}
 				if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)))
 				{
-					_player->MoveBy(sf::Vector2f(0.0f,-(_player->GetVelocity().y)));
+					_player->MoveBy(sf::Vector2f(0.0f,-(_player->GetVelocity().y)*_timeSinceLastUpdate*60));
 					_player->VerticalCollision();
+				}
+				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j), _player->_onLadder))
+				{
+					_player->MoveBy(sf::Vector2f(-(_player->GetVelocity().x)*_timeSinceLastUpdate*60,(_player->_onLadder ? -2.0f : 0.0f)));
 				}
 				break;
 			case SpriteLibrary::DOOR_OPEN:
@@ -212,7 +213,7 @@ void Application::Update()
 		}
     }
 
-	_level->Update();
+	_level->Update(_timeSinceLastUpdate);
 
 	_camera->setCenter(_player->GetCentre());
 	_window->setView(*_camera);

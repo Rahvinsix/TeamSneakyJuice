@@ -7,7 +7,7 @@ class Player :
 public:
 	Player(void);
 	~Player(void);
-	void Update(void);
+	void Update(float timeElapsed);
 	bool _playerFacing;
 	void DrawPlayer(sf::RenderWindow* window);
 	bool _onLadder;

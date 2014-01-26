@@ -26,7 +26,7 @@ public:
 	GameObject* SetRotation(float);
 	
 	GameObject* Accelerate(sf::Vector2f);
-	void Move(void);
+	void Move(float);
 	void MoveBy(sf::Vector2f);
 	void Draw(sf::RenderWindow*);
 	void DeltaVy(float vy);

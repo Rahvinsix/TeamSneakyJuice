@@ -31,9 +31,9 @@ void SpinningObject::SetDistance(int distance)
 	_distance = distance;
 }
 
-void SpinningObject::Update(void)
+void SpinningObject::Update(float timeSinceLastUpdate)
 {
-	_angleStage += 0.01;
+	_angleStage += 0.01 * 60 * timeSinceLastUpdate;
 
 	sf::FloatRect spriteSize = SpriteLibrary::GetSprite(_gameObject.GetSpriteID()).getLocalBounds();
 	

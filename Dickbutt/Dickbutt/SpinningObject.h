@@ -13,7 +13,7 @@ public:
 
 	void SetDistance(int);
 	GameObject* GetGameObject(void);
-	void Update(void);
+	void Update(float);
 	void Draw(sf::RenderWindow*);
 
 
