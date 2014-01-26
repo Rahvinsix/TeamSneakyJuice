@@ -9,7 +9,7 @@
 #include <sstream>
 #include <iostream>
 
-#define TOTAL_LEVELS 1
+#define TOTAL_LEVELS 3
 
 
 class Application
