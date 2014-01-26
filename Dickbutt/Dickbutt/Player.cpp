@@ -12,6 +12,10 @@ Player::Player(void)
 	_playerFacing = true;
 	_onLadder = false;
 	hearts = 0;
+
+	_moving = false;
+	_animationStep = 0.0f;
+	_currentFrame = 0;
 }
 
 
@@ -36,17 +40,17 @@ void Player::Update(float timeElapsed)
 	}
 	if(Input::IsDown(sf::Keyboard::Space) && jumpFrames == 0 && (onGround || _onLadder))
 	{
-		jumpFrames = 40;
+		jumpFrames = 0.5f;
 		onGround = false;
 	}
 	if(Input::IsUp(sf::Keyboard::Space))
 	{
-		jumpFrames = 0;
+		jumpFrames = 0.0f;
 	}
 
 	if(jumpFrames > 0)
 	{
-		jumpFrames--;
+		jumpFrames-=timeElapsed;
 		DeltaVy(-5.0f);
 	}
 
@@ -70,6 +74,27 @@ void Player::Update(float timeElapsed)
 	Move(timeElapsed);
 	
 	_onLadder = false;
+
+	bool oldMoving = _moving;
+	_moving = GetVelocity().x != 0;
+	if(_moving && !oldMoving)
+	{
+		_currentFrame = 0;
+		_animationStep = 0;
+	}
+	else if(_moving && oldMoving)
+	{
+		_animationStep += timeElapsed;
+		if(_animationStep >= 0.25)
+		{
+			_animationStep = 0;
+			// Alternates between 0 and 1
+			_currentFrame = 1 - _currentFrame;
+		}
+	}
+
+	if(!_moving)
+		_currentFrame = 0;
 }
 
 void Player::VerticalCollision()
@@ -81,13 +106,11 @@ void Player::VerticalCollision()
 void Player::DrawPlayer(sf::RenderWindow* window)
 {
 	sf::Sprite playerSprite;
-	playerSprite = SpriteLibrary::GetSprite(SpriteLibrary::PLAYER);
+	playerSprite = SpriteLibrary::GetSprite((_currentFrame == 0 ? SpriteLibrary::PLAYER : SpriteLibrary::PLAYER_1));
 	playerSprite.setPosition(GetPosition() + sf::Vector2f(playerSprite.getLocalBounds().width/2,(playerSprite.getLocalBounds().height/2)));
 	playerSprite.setOrigin(GetCentre()-GetPosition());
 	if(!_playerFacing)
-	{
 		playerSprite.setScale(-1,1);
-	}
 	
 	window->draw(playerSprite);
 }

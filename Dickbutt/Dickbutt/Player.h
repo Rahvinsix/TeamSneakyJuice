@@ -18,10 +18,14 @@ public:
 	int checkHearts(void);
 private:
 	float gravity;
-	int jumpFrames;
+	float jumpFrames;
 	sf::Vector2f _playerSpawn;
 	bool onGround;
 	int hearts;
+
+	int _currentFrame;
+	bool _moving;
+	float _animationStep;
 	
 };
 

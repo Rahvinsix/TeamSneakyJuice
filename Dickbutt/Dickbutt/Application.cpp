@@ -185,7 +185,6 @@ void Application::Update()
 
 	for(std::vector<SpinningObject>::iterator i = _level->_spinningObjects.begin();i!= _level->_spinningObjects.end();i++)
 	{
-	
 		if((GameObject::CheckCollide(_player, i->GetGameObject())) && (i->GetGameObject()->GetSpriteID() == SpriteLibrary::HEART_END))
 		{
 		
@@ -193,7 +192,6 @@ void Application::Update()
 			_player->addHeart();
 			printf("Hearts: %d",_player->checkHearts());
 		}
-	
 	}
 	
     sf::Event event;

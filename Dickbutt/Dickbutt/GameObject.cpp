@@ -62,6 +62,8 @@ void GameObject::Draw(sf::RenderWindow* window)
 	else
 		if(!_playerDirec)
 		{
+			playerSprite.setScale(sf::Vector2f(-1, 1));
+			playerSprite.move(sf::Vector2f(playerSprite.getLocalBounds().width, 0));
 			if(_playerSight - _position.x > 0 && _playerSight - _position.x < mySprite.getLocalBounds().width)
 			{
 				sf::FloatRect spriteBounds = mySprite.getLocalBounds();
