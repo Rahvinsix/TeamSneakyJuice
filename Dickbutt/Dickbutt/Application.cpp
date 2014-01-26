@@ -31,6 +31,10 @@ Application::Application(void)
     
 	music.play();
 	music.setLoop(true);*/
+
+	_died = false;
+	_goToNextLevel = false;
+	_timeToWait = 0.0f;
 	
 	_updateTime.restart();
 
@@ -47,8 +51,35 @@ Application::Application(void)
 
 void Application::Update()
 {
+
 	_timeSinceLastUpdate = _updateTime.getElapsedTime().asSeconds();
 	_updateTime.restart();
+
+	if(_died || _goToNextLevel)
+	{
+		_timeToWait -= _timeSinceLastUpdate;
+
+		if(_timeToWait <= 0)
+		{
+			if(_died)
+			{
+				_died = false;
+				
+				StartLevel();
+			}
+			if(_goToNextLevel)
+			{
+				_currentLevel++;
+				if(_currentLevel <= TOTAL_LEVELS)
+					StartLevel();
+				else
+					EndGame();
+				_goToNextLevel = false;
+			}
+		}
+
+		return;
+	}
 
 	for(int i = 0; i < _level->Width();i++)
 		for(int j = 0;j < _level->Height(); j++)
@@ -136,11 +167,7 @@ void Application::Update()
 				{
 					if(_player->checkHearts() == 6)
 					{
-						_currentLevel++;
-						if(_currentLevel <= TOTAL_LEVELS)
-							StartLevel();
-						else
-							EndGame();
+						_goToNextLevel = true;
 					}
 				}
 				break;
@@ -152,31 +179,33 @@ void Application::Update()
 			case SpriteLibrary::LAVA_6:
 				if(GameObject::CheckCollide(_player, _level->TileAt(i, j)))
 				{
-					_player->Death();
-					printf("DEAD");
+					_died = true;
+					_timeToWait = 1;
 				}   
 				break;
+			case SpriteLibrary::HIT_FROM_ABOVE_GUY:
 			case SpriteLibrary::H_SPIKES:
 			case SpriteLibrary::H_SPIKES_FLIPPED:
-			case SpriteLibrary::HIT_FROM_ABOVE_GUY:
-				if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)))
+				if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)) && _level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::HIT_FROM_ABOVE_GUY)
 				{
 					_level->SetTileAt(i, j, SpriteLibrary::AIR);
 				}
 				else if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)))
 				{
-					_player->Death();
+					_died = true;
+					_timeToWait = 1;
 				}
 				break;
 			case SpriteLibrary::V_SPIKES:
 			case SpriteLibrary::HIT_FROM_SIDE_GUY:
-				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)))
+				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)) && _level->TileAt(i, j)->GetSpriteID() == SpriteLibrary::HIT_FROM_SIDE_GUY)
 				{
 					_level->SetTileAt(i, j, SpriteLibrary::AIR);
 					
 				}else if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)))
 				{
-					_player->Death();
+					_died = true;
+					_timeToWait = 1;
 				} 
 				break;
 			}
@@ -185,12 +214,19 @@ void Application::Update()
 
 	for(std::vector<SpinningObject>::iterator i = _level->_spinningObjects.begin();i!= _level->_spinningObjects.end();i++)
 	{
-		if((GameObject::CheckCollide(_player, i->GetGameObject())) && (i->GetGameObject()->GetSpriteID() == SpriteLibrary::HEART_END))
+		if((GameObject::CheckCollide(_player, i->GetGameObject())))
 		{
-		
-			i->GetGameObject()->SetSpriteID(SpriteLibrary::AIR);
-			_player->addHeart();
-			printf("Hearts: %d",_player->checkHearts());
+			if((i->GetGameObject()->GetSpriteID() == SpriteLibrary::HEART_END))
+			{
+				i->GetGameObject()->SetSpriteID(SpriteLibrary::AIR);
+				_player->addHeart();
+				printf("Hearts: %d\n",_player->checkHearts());
+			}
+			else
+			{
+				_died = true;
+				_timeToWait = 1;
+			}
 		}
 	}
 	

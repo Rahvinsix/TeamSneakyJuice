@@ -28,6 +28,10 @@ private:
 	sf::RenderWindow* _window;
 
 	float _timeSinceLastUpdate;
+	
+	bool _goToNextLevel;
+	bool _died;
+	float _timeToWait;
 
 	bool _gameEnded;
 
