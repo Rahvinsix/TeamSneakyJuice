@@ -158,26 +158,26 @@ void Application::Update()
 				break;
 			case SpriteLibrary::H_SPIKES:
 			case SpriteLibrary::H_SPIKES_FLIPPED:
-				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)))
-				{
-					_player->Death();
-				}
-				else if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)))
-				{
-					_player->MoveBy(sf::Vector2f(0.0f,-(_player->GetVelocity().y)));
-					_player->VerticalCollision();
-				}
-				break;
-			case SpriteLibrary::V_SPIKES:
+			case SpriteLibrary::HIT_FROM_ABOVE_GUY:
 				if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)))
 				{
-					_player->Death();
+					_level->SetTileAt(i, j, SpriteLibrary::AIR);
 				}
 				else if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)))
 				{
-					_player->MoveBy(sf::Vector2f(0.0f,-(_player->GetVelocity().y)));
-					
+					_player->Death();
 				}
+				break;
+			case SpriteLibrary::V_SPIKES:
+			case SpriteLibrary::HIT_FROM_SIDE_GUY:
+				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j)))
+				{
+					_level->SetTileAt(i, j, SpriteLibrary::AIR);
+					
+				}else if(GameObject::CheckVCollideWithVelocity(_player, _level->TileAt(i, j)))
+				{
+					_player->Death();
+				} 
 				break;
 			}
 		}
