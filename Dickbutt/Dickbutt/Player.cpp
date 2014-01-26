@@ -39,7 +39,7 @@ void Player::Update(float timeElapsed)
 	}
 	if(Input::IsDown(sf::Keyboard::Space) && jumpFrames == 0 && (onGround || _onLadder))
 	{
-		jumpFrames = 0.5f;
+		jumpFrames = 0.6f;
 		onGround = false;
 	}
 	if(Input::IsUp(sf::Keyboard::Space))
@@ -50,7 +50,7 @@ void Player::Update(float timeElapsed)
 	if(jumpFrames > 0)
 	{
 		jumpFrames-=timeElapsed;
-		DeltaVy(-5.0f);
+		SetVelocity(sf::Vector2f(GetVelocity().x, -5.0f));//DeltaVy(-5.0f * 30 * timeElapsed);
 	}
 
 	if(!_onLadder)
