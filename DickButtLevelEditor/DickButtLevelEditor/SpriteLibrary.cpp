@@ -34,6 +34,10 @@ void SpriteLibrary::Initialise()
 	sprites[17] = new Sprite("Assets/Images/spikeyball2.png");
 	sprites[18] = new Sprite("Assets/Images/ladder.png");
 	sprites[19] = new Sprite("Assets/Images/spikes_right.png");
+	sprites[20] = new Sprite("Assets/Images/floor_leftbottom.png");
+	sprites[21] = new Sprite("Assets/Images/floor_rightbottom.png");
+	sprites[22] = new Sprite("Assets/Images/floor_leftcorner.png");
+	sprites[23] = new Sprite("Assets/Images/floor_rightcorner.png");
 }
 
 sf::Sprite SpriteLibrary::GetSprite(int spriteId)

@@ -34,6 +34,11 @@ void SpriteLibrary::Initialise(void)
 	_libraryFile[DOUBLE_BALL] = new Sprite("Assets/Images/rotatebase.png");
 	_libraryFile[LADDER] = new Sprite("Assets/Images/ladder.png");
 	_libraryFile[H_SPIKES_FLIPPED] = new Sprite("Assets/Images/spikes_right.png");
+	_libraryFile[FLOOR_LB] = new Sprite("Assets/Images/floor_leftbottom.png");
+	_libraryFile[FLOOR_RB] = new Sprite("Assets/Images/floor_rightbottom.png");
+	_libraryFile[FLOOR_LC] = new Sprite("Assets/Images/floor_leftcorner.png");
+	_libraryFile[FLOOR_RC] = new Sprite("Assets/Images/floor_rightcorner.png");
+
 	_libraryFile[HEART_END] = new Sprite("Assets/Images/heart.png");
 	_libraryFile[SPIKE_END] = new Sprite("Assets/Images/spikeyball.png");
 	_libraryFile[SPIN_CHAIN] = new Sprite("Assets/Images/SpinChain.png");
@@ -56,3 +61,8 @@ sf::Texture SpriteLibrary::GetTexture(int spriteID)
 {
 	return _libraryFile[spriteID]->GetTexture();
 }
+
+/*bool SpriteLibrary::IsGround(int spriteID)
+{
+	return spriteID == SpriteLibrary::GROUND || spriteID == SpriteLibrary::FLOOR_LB || spriteID == SpriteLibrary::FLOOR_RB || spriteID == SpriteLibrary::FLOOR_LC || spriteID == SpriteLibrary::FLOOR_RC || spriteID == 
+}*/

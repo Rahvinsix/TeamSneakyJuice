@@ -1,7 +1,7 @@
 #pragma once
 #include "Sprite.h"
 
-#define TOTAL_SPRITES 23
+#define TOTAL_SPRITES 27
 
 
 class SpriteLibrary
@@ -15,6 +15,8 @@ public:
 
 	static sf::Sprite GetSprite(int);
 	static sf::Texture GetTexture(int);
+
+	static bool IsGround(int spriteId);
 
 	
 	enum
@@ -39,6 +41,11 @@ public:
 		DOUBLE_BALL,
 		LADDER,
 		H_SPIKES_FLIPPED,
+		FLOOR_LB,
+		FLOOR_RB,
+		FLOOR_LC,
+		FLOOR_RC,
+
 		HEART_END,
 		SPIKE_END,
 		SPIN_CHAIN,

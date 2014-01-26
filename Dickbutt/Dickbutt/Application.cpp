@@ -116,6 +116,10 @@ void Application::Update()
 			case SpriteLibrary::HEART_AND_BALL:
 			case SpriteLibrary::SPIKE_BALL:
 			case SpriteLibrary::HEART:
+			case SpriteLibrary::FLOOR_LB:
+			case SpriteLibrary::FLOOR_LC:
+			case SpriteLibrary::FLOOR_RB:
+			case SpriteLibrary::FLOOR_RC:
 				if(GameObject::CheckHCollideWithVelocity(_player, _level->TileAt(i, j), _player->_onLadder))
 				{
 					_player->MoveBy(sf::Vector2f(-(_player->GetVelocity().x),(_player->_onLadder ? -2.0f : 0.0f)));
