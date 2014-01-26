@@ -1,7 +1,7 @@
 #pragma once
 #include "Sprite.h"
 
-#define TOTAL_SPRITES 29
+#define TOTAL_SPRITES 38
 
 
 class SpriteLibrary
@@ -57,6 +57,7 @@ public:
 		DOOR_OPEN,
 		PLAYER_1,
 		LEVEL_TIMER_BG
+		SPLASH
 	};
 
 	static Sprite* _libraryFile[TOTAL_SPRITES];

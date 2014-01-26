@@ -3,6 +3,8 @@
 sf::Clock _worldTime;
 sf::Clock _updateTime;
 
+enum {SPLASH,PLAYING,END};
+
 Application::Application(void)
 {
 	_window = new sf::RenderWindow(sf::VideoMode(800, 600), "Team Sneaky Juice");
@@ -12,6 +14,7 @@ Application::Application(void)
 	Input::Initialise();
 	_gameEnded = false;
 	
+	int gameState = SPLASH;
 
 	_camera = new sf::View(sf::FloatRect(0, 0, 800, 600));
 	_window->setView(*_camera);
@@ -24,26 +27,62 @@ Application::Application(void)
 	_window->setFramerateLimit(60);
 
 	
-	/*sf::Music music;
+	sf::Music music;
 	if (!music.openFromFile("Assets/Sounds/track01.ogg"))
 	{
 		printf("Error loading musics");
 	}
     
 	music.play();
-	music.setLoop(true);*/
+	music.setLoop(true);
 
 	_died = false;
 	_goToNextLevel = false;
 	_timeToWait = 0.0f;
+	
+	printf("Start to draw splash\n");
+	splash = new sf::Sprite();
+	splash->setTexture(SpriteLibrary::GetTexture(SpriteLibrary::SPLASH));
+	SplashScreen();
+	printf("End drawing splash\n");
 	
 	_updateTime.restart();
 
 	
    while (_window->isOpen())
     {
-		Update();
-		Draw();
+		Input::Update();
+		switch(gameState)
+		{
+			case SPLASH:
+				if(Input::IsDown(sf::Keyboard::Space))
+					gameState = PLAYING;
+				break;
+			case PLAYING:
+				Update();
+				Draw();
+				break;
+			case END:
+				EndGame();
+				break;
+		}
+	
+		sf::Event event;
+		while(_window->pollEvent(event))
+		{
+			switch(event.type)
+			{
+			case sf::Event::Closed:
+				_gameEnded = true;
+				break;
+			case sf::Event::KeyPressed:
+				Input::KeyPressed(event.key.code);
+				break;
+			case sf::Event::KeyReleased:
+				Input::KeyReleased(event.key.code);
+				break;
+			}
+		}
 
 		if(_gameEnded || Input::IsDown(sf::Keyboard::Key::Escape))
 			_window->close();
@@ -115,7 +154,7 @@ void Application::Update()
 	}
 
 	//Update player input
-	Input::Update();
+	//Input::Update();
 	_player->Update(_timeSinceLastUpdate);
 
 	sf::FloatRect spriteSize = SpriteLibrary::GetSprite(0).getLocalBounds();
@@ -229,23 +268,6 @@ void Application::Update()
 			}
 		}
 	}
-	
-    sf::Event event;
-    while(_window->pollEvent(event))
-    {
-		switch(event.type)
-		{
-		case sf::Event::Closed:
-			_gameEnded = true;
-			break;
-		case sf::Event::KeyPressed:
-			Input::KeyPressed(event.key.code);
-			break;
-		case sf::Event::KeyReleased:
-			Input::KeyReleased(event.key.code);
-			break;
-		}
-    }
 
 	_level->Update(_timeSinceLastUpdate);
 	if(_level->TimeUp())
@@ -294,6 +316,14 @@ void Application::Draw()
 	_window->draw(levelTime);
 
     _window->display();
+}
+
+void Application::SplashScreen()
+{
+	_window->clear(sf::Color(255, 0, 255, 255));
+	sf::Sprite mySplash = SpriteLibrary::GetSprite(SpriteLibrary::SPLASH);
+	_window->draw(mySplash);
+	_window->display();
 }
 
 void Application::StartLevel()

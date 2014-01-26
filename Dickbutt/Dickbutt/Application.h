@@ -21,9 +21,12 @@ private:
 	void Update();
 	void Draw();
 
+	void SplashScreen();
 	void StartLevel();
 	void EndGame();
 
+	
+	
 
 	sf::RenderWindow* _window;
 
@@ -40,6 +43,7 @@ private:
 	int _doorj;
 	std::string* _levelNames;
 	
+	sf::Sprite* splash;
 
 	LevelClass* _level;
 	Player* _player;

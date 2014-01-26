@@ -52,6 +52,7 @@ void SpriteLibrary::Initialise(void)
 	_libraryFile[DOOR_OPEN] = new Sprite("Assets/Images/levelend_open.png");
 	_libraryFile[PLAYER_1] = new Sprite("Assets/Images/player2.png");
 	_libraryFile[LEVEL_TIMER_BG] = new Sprite("Assets/Images/LevelTimerBackground.png");
+	_libraryFile[SPLASH] = new Sprite("Assets/Images/splash.png");
 }
 
 sf::Sprite SpriteLibrary::GetSprite(int spriteID)
