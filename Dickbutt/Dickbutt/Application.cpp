@@ -23,14 +23,14 @@ Application::Application(void)
 	_font->loadFromFile("Assets/Fonts/arial.ttf");
 
 	
-	sf::Music music;
+	/*sf::Music music;
 	if (!music.openFromFile("Assets/Sounds/track01.ogg"))
 	{
 		printf("Error loading musics");
 	}
     
 	music.play();
-	music.setLoop(true);
+	music.setLoop(true);*/
 	
 	_updateTime.restart();
 
